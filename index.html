@@ -89,60 +89,19 @@
     font-family:Arial, Helvetica, sans-serif;font-size:12px;line-height:1.5;}
   #cetak-doc h2{text-align:center;font-size:17px;margin:0 0 0;padding:14px;background:var(--navy);color:#fff;
     font-weight:700;border-radius:4px 4px 0 0;}
-  .c-row{display:flex;border:1px solid #ccc;border-top:none;}
-  .c-row:first-child{border-top:1px solid #ccc;}
-  .c-label{background:var(--field-blue);font-weight:700;padding:7px 10px;flex:0 0 150px;min-width:0;border-right:1px solid #ccc;
-    font-size:12px;color:#0B2545;text-transform:uppercase;letter-spacing:.01em;}
-  .c-val{padding:7px 10px;flex:1;white-space:pre-wrap;}
-  .c-pair{display:flex;border:1px solid #ccc;border-top:none;}
-  .c-pair > div{flex:1;display:flex;}
-  .c-pair .c-label{flex:0 0 150px;}
-  .c-hdr-row{display:flex;border:1px solid #ccc;border-top:none;background:var(--field-blue);}
-  .c-hdr-row>div{padding:5px 6px;border-right:1px solid #ccc;font-weight:700;font-size:12px;
-    text-align:center;text-transform:uppercase;letter-spacing:.02em;color:#0B2545;}
-  .c-hdr-row>div:last-child{border-right:none;}
-  .c-val-row{display:flex;border:1px solid #ccc;border-top:none;}
-  .c-val-row>div{padding:6px 8px;border-right:1px solid #ccc;font-size:12px;text-align:center;white-space:pre-wrap;}
-  .c-val-row>div:last-child{border-right:none;}
-  .c-empty-box{border:1px solid #ccc;border-top:none;min-height:60px;padding:8px 10px;}
+  .c-empty-box{border:1px solid #000;border-top:none;min-height:60px;padding:8px 10px;}
   .c-empty-box .lbl{font-weight:700;font-size:12px;margin-bottom:4px;display:block;}
-  .c-side-by-side{display:flex;gap:0;margin-top:0;border:1px solid #ccc;border-top:none;}
-  .kbat-label{flex:0 0 150px;background:var(--field-blue);color:#0B2545;font-weight:700;text-align:center;
-    display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px 8px;font-size:12px;
-    border-right:1px solid #ccc;line-height:1.4;}
-  .kbat-grid-wrap{flex:0 0 32%;display:flex;flex-direction:column;border-right:1px solid #ccc;}
-  .kbat-r{display:flex;flex:0 0 auto;border-bottom:1px solid #ccc;}
-  .kbat-r.grow{flex:1;}
-  .kbat-r:last-child{border-bottom:none;}
-  .kbat-r .term{flex:1;display:flex;align-items:center;padding:8px 10px;font-size:12px;border-right:1px solid #eee;}
-  .kbat-r .chk{flex:0 0 26px;display:flex;align-items:center;justify-content:center;font-size:12px;border-right:1px solid #eee;}
-  .emk-label{flex:0 0 13%;background:var(--field-blue);color:#0B2545;font-weight:700;text-align:center;
-    display:flex;align-items:center;justify-content:center;padding:10px 8px;font-size:12px;
-    border-right:1px solid #ccc;line-height:1.4;}
-  .emk-grid-wrap{flex:1;display:flex;flex-direction:column;}
-  .emk-r{display:flex;flex:1;border-bottom:1px solid #eee;}
-  .emk-r:last-child{border-bottom:none;}
-  .emk-r .item{flex:0 0 42%;padding:6px 10px;font-size:12px;font-weight:600;border-right:1px solid #eee;display:flex;align-items:center;}
-  .emk-r .note{flex:1;padding:6px 10px;font-size:12px;display:flex;align-items:center;white-space:pre-wrap;}
+  table.kpm-table{width:100%;border-collapse:collapse;table-layout:fixed;margin-top:0;}
+  table.kpm-table + table.kpm-table, table.kpm-table + .c-section{margin-top:0;}
+  table.kpm-table tr:first-child td{border-top:none;}
+  table.kpm-table td{border:1px solid #000;padding:6px 9px;font-size:12px;vertical-align:middle;
+    white-space:pre-wrap;}
+  table.kpm-table td.label-cell{background:var(--field-blue);color:#0B2545;font-weight:700;
+    text-align:center;vertical-align:middle;text-transform:uppercase;}
+  table.kpm-table td.head-cell{background:var(--field-blue);color:#0B2545;font-weight:700;text-align:center;text-transform:uppercase;}
+  table.kpm-table td.no-caps{text-transform:none;}
   .c-section{background:var(--field-blue);color:#0B2545;text-align:center;font-weight:700;padding:6px;
-    margin-top:0;font-size:12px;border:1px solid #ccc;border-top:none;}
-  .c-grid2{border:1px solid #ccc;border-top:none;}
-  .c-grid2 .c-gitem{display:flex;border-bottom:1px solid #eee;}
-  .c-grid2 .c-gitem:last-child{border-bottom:none;}
-  .c-grid2 .c-gitem > div{flex:1;padding:6px 9px;font-size:12px;border-right:1px solid #eee;}
-  .c-grid2 .c-gitem > div:last-child{border-right:none;}
-  .c-item1{border:1px solid #ccc;border-top:none;display:flex;}
-  .c-item1 .c-label{flex:0 0 42%;background:transparent;color:var(--text);text-transform:none;font-weight:600;}
-  .akt-wrap{display:flex;border:1px solid #ccc;border-top:none;}
-  .akt-label{flex:0 0 150px;background:var(--field-blue);color:#0B2545;font-weight:700;text-align:center;
-    display:flex;align-items:center;justify-content:center;padding:10px 8px;font-size:12px;
-    border-right:1px solid #ccc;}
-  .akt-r{display:flex;border-bottom:1px solid #ccc;}
-  .akt-r:last-child{border-bottom:none;}
-  .akt-r>div{padding:6px 8px;font-size:12px;white-space:pre-wrap;border-right:1px solid #eee;}
-  .akt-r>div:last-child{border-right:none;}
-  .akt-r.akt-head{background:var(--field-blue);color:#0B2545;font-weight:700;}
-  .akt-r.akt-head>div{border-right:1px solid #ccc;}
+    margin-top:0;font-size:12px;border:1px solid #000;border-top:none;}
   .c-sig{display:flex;gap:16px;margin-top:20px;}
   .c-sig div{flex:1;font-size:12px;white-space:pre-wrap;}
   @media print{
@@ -150,6 +109,9 @@
     body{background:#fff;}
     main{padding:0;max-width:100%;}
     #cetak-doc{border:none;padding:0;}
+    table.kpm-table tr{break-inside:avoid; page-break-inside:avoid;}
+    .c-section{break-after:avoid; page-break-after:avoid;}
+    .c-empty-box{break-inside:avoid; page-break-inside:avoid;}
   }
 </style>
 </head>
@@ -197,7 +159,12 @@
         </div>
         <div class="grid2">
           <div class="field"><label>Teknik</label><input type="text" id="f-teknik"></div>
-          <div class="field"><label>Tajuk</label><input type="text" id="f-tajuk"></div>
+          <div class="field">
+            <label>Tajuk</label>
+            <select id="f-tajuk-dropdown" style="display:none;"></select>
+            <input type="text" id="f-tajuk">
+            <div class="hint" id="tajuk-dropdown-hint" style="display:none;">Daripada senarai unit rasmi Tahun ini. Nak taip sendiri? <a href="#" onclick="showTajukTextInput();return false;">Taip terus</a></div>
+          </div>
         </div>
       </div>
     </div>
@@ -345,6 +312,8 @@ const RUJUKAN = {
    ============================================================ */
 let dskpDataCache = {};   // keyed by Tahun -> array baris {tahun,modul,kodSK,sk,bidang,kodSP,spTeks}
 let dskpCurrentRows = []; // baris untuk Tahun yang sedang dipilih
+let tajukDataCache = {};  // keyed by Tahun -> array baris {tahun,unit,tajuk,bidang,teknik,pentaksiran}
+let tajukCurrentRows = [];
 
 async function loadDskpForTahun(tahun){
   if(dskpDataCache[tahun]) return dskpDataCache[tahun];
@@ -355,6 +324,17 @@ async function loadDskpForTahun(tahun){
     dskpDataCache[tahun] = [];
   }
   return dskpDataCache[tahun];
+}
+
+async function loadTajukForTahun(tahun){
+  if(tajukDataCache[tahun]) return tajukDataCache[tahun];
+  try{
+    const rows = await apiGet('tajuk', {tahun});
+    tajukDataCache[tahun] = Array.isArray(rows) ? rows : [];
+  } catch(err){
+    tajukDataCache[tahun] = [];
+  }
+  return tajukDataCache[tahun];
 }
 
 const KBAT_ITEMS = [
@@ -583,13 +563,57 @@ async function toggleDskpHelper(){
   const skWrap = document.getElementById('dskp-sk-wrap');
   const spWrap = document.getElementById('dskp-sp-wrap');
   if(!skWrap || !spWrap) return;
-  if(!state.tahun){ skWrap.style.display = 'none'; spWrap.style.display = 'none'; return; }
+  if(!state.tahun){
+    skWrap.style.display = 'none'; spWrap.style.display = 'none';
+    showTajukTextInput();
+    return;
+  }
   const rows = await loadDskpForTahun(state.tahun);
   dskpCurrentRows = rows;
-  if(!rows.length){ skWrap.style.display = 'none'; spWrap.style.display = 'none'; return; }
-  skWrap.style.display = 'block';
-  spWrap.style.display = 'block';
-  renderDskpDropdowns();
+  if(!rows.length){ skWrap.style.display = 'none'; spWrap.style.display = 'none'; }
+  else { skWrap.style.display = 'block'; spWrap.style.display = 'block'; renderDskpDropdowns(); }
+
+  const tajukRows = await loadTajukForTahun(state.tahun);
+  tajukCurrentRows = tajukRows;
+  if(!tajukRows.length){ showTajukTextInput(); }
+  else { renderTajukDropdown(); showTajukDropdown(); }
+}
+
+function showTajukDropdown(){
+  const dd = document.getElementById('f-tajuk-dropdown');
+  const txt = document.getElementById('f-tajuk');
+  const hint = document.getElementById('tajuk-dropdown-hint');
+  if(!dd || !txt) return;
+  dd.style.display = 'block';
+  txt.style.display = 'none';
+  if(hint) hint.style.display = 'block';
+}
+
+function showTajukTextInput(){
+  const dd = document.getElementById('f-tajuk-dropdown');
+  const txt = document.getElementById('f-tajuk');
+  const hint = document.getElementById('tajuk-dropdown-hint');
+  if(!dd || !txt) return;
+  dd.style.display = 'none';
+  txt.style.display = 'block';
+  if(hint) hint.style.display = 'none';
+}
+
+function renderTajukDropdown(){
+  const dd = document.getElementById('f-tajuk-dropdown');
+  const txt = document.getElementById('f-tajuk');
+  if(!dd || !txt) return;
+  dd.innerHTML = '<option value="">-- Pilih Tajuk (Unit) --</option>' + tajukCurrentRows.map((r,i)=>
+    `<option value="${i}">Unit ${esc(r.unit)} — ${esc(r.tajuk)}</option>`).join('');
+  // padankan pilihan semasa jika Tajuk sedia ada sepadan dengan salah satu unit
+  const matchIdx = tajukCurrentRows.findIndex(r => r.tajuk === txt.value);
+  if(matchIdx !== -1) dd.value = String(matchIdx);
+  dd.onchange = ()=>{
+    if(dd.value === ''){ txt.value = ''; state.tajuk = ''; return; }
+    const r = tajukCurrentRows[parseInt(dd.value, 10)];
+    txt.value = r.tajuk || '';
+    state.tajuk = txt.value;
+  };
 }
 
 function renderDskpDropdowns(){
@@ -767,141 +791,167 @@ function openCetakFromList(id){
   });
 }
 
-function markLine(val, label){
-  return `<b>${esc(label)}</b>`;
-}
 function catatanOrDash(val){
   const v = val && String(val).trim() !== '' ? val : '\u2013';
   return esc(v);
 }
 
 function renderCetak(d){
-  // EMK ialah SATU lajur (10 baris) dengan label biru menegak di sebelah kiri
-  const emkRowsHtml = EMK_ITEMS.map(([k,l])=>{
-    return `<div class="emk-r"><div class="item">${esc(l)}</div><div class="note">${catatanOrDash(d[k])}</div></div>`;
-  }).join('');
-  const pmkRows = PMK_ITEMS.map(([k,l])=>`
-    <div class="c-item1"><div class="c-label">${markLine(d[k],l)}</div><div class="c-val">${catatanOrDash(d[k])}</div></div>`).join('');
-  const kiRows = KI_ITEMS.map(([k,l])=>`
-    <div class="c-item1"><div class="c-label">${markLine(d[k],l)}</div><div class="c-val">${catatanOrDash(d[k])}</div></div>`).join('');
-
-  // KBAT: grid 4-lajur (Terma | Tanda | Terma | Tanda), 3 baris; baris terakhir stretch turun
+  // KBAT + EMK digabung jadi SATU jadual (10 baris, ikut jumlah item EMK) supaya
+  // tinggi kedua-dua bahagian sentiasa sama sepenuhnya — KBAT isi 3 baris pertama sahaja,
+  // baki baris kosong (bersempadan) untuk isi ruang, macam borang asal.
   function chkMark(name){ return d[name] === true ? '\u2713' : ''; }
   const kbatPairs = [
     ['kbatMengingat','Mengingat','kbatMenganalisis','Menganalisis'],
     ['kbatMemahami','Memahami','kbatMenilai','Menilai'],
     ['kbatMengaplikasi','Mengaplikasi','kbatMencipta','Mencipta']
   ];
-  const kbatRowsHtml = kbatPairs.map(([k1,l1,k2,l2],i)=>`
-    <div class="kbat-r${i===kbatPairs.length-1?' grow':''}">
-      <div class="term">${esc(l1)}</div><div class="chk">${chkMark(k1)}</div>
-      <div class="term">${esc(l2)}</div><div class="chk">${chkMark(k2)}</div>
-    </div>`).join('');
+  const totalRows = EMK_ITEMS.length; // 10 — EMK menentukan jumlah baris jadual gabungan
+  // Bahagikan sama rata (lebih kurang) antara 3 baris KBAT — baki dibahagikan ke baris awal
+  const baseSpan = Math.floor(totalRows / kbatPairs.length);
+  const remainder = totalRows % kbatPairs.length;
+  const kbatSpans = kbatPairs.map((_,i)=> baseSpan + (i < remainder ? 1 : 0)); // cth: [4,3,3]
+  const kbatStartRow = []; // baris (index) permulaan setiap seksyen KBAT
+  { let acc = 0; kbatSpans.forEach(s=>{ kbatStartRow.push(acc); acc += s; }); }
+
+  const kbatEmkRows = [];
+  for(let i=0;i<totalRows;i++){
+    const sectionIdx = kbatStartRow.findIndex((start,idx)=> i === start);
+    let kbatCells;
+    if(sectionIdx !== -1){
+      const [k1,l1,k2,l2] = kbatPairs[sectionIdx];
+      const span = kbatSpans[sectionIdx];
+      kbatCells = `<td rowspan="${span}" style="vertical-align:middle;">${esc(l1)}</td>` +
+        `<td rowspan="${span}" style="vertical-align:middle;text-align:center;">${chkMark(k1)}</td>` +
+        `<td rowspan="${span}" style="vertical-align:middle;">${esc(l2)}</td>` +
+        `<td rowspan="${span}" style="vertical-align:middle;text-align:center;">${chkMark(k2)}</td>`;
+    } else {
+      kbatCells = ''; // ditutup oleh rowspan seksyen KBAT di atas
+    }
+    const [ek, el] = EMK_ITEMS[i];
+    const emkLabelCell = i===0
+      ? `<td rowspan="${totalRows}" class="label-cell" style="width:13%;">ELEMEN MERENTAS KURIKULUM (EMK)</td>` : '';
+    const kbatLabelCell = i===0
+      ? `<td rowspan="${totalRows}" class="label-cell" style="width:15%;">KEMAHIRAN BERFIKIR ARAS TINGGI (KBAT)<br>` +
+        `<span style="font-weight:700;font-style:italic;font-size:11px;">(Tandakan (/) pada KBAT yang digunakan dalam PdPc)</span></td>`
+      : '';
+    kbatEmkRows.push(`<tr>${kbatLabelCell}${kbatCells}${emkLabelCell}` +
+      `<td style="font-weight:600;">${esc(el)}</td><td>${catatanOrDash(d[ek])}</td></tr>`);
+  }
+  const kbatEmkTableHtml = `<table class="kpm-table"><colgroup>
+      <col style="width:15%;"><col style="width:16%;"><col style="width:4%;"><col style="width:16%;"><col style="width:4%;">
+      <col style="width:13%;"><col style="width:15%;"><col style="width:17%;">
+    </colgroup>${kbatEmkRows.join('')}</table>`;
+
+  function buildSidebarTable_(sectionLabel, items, colWidths){
+    const n = items.length;
+    const rows = items.map(([k,l],i)=>{
+      const labelCell = i===0 ? `<td rowspan="${n}" class="label-cell" style="width:15%;">${esc(sectionLabel)}</td>` : '';
+      return `<tr>${labelCell}<td style="text-align:left;font-weight:600;">${esc(l)}</td><td>${catatanOrDash(d[k])}</td></tr>`;
+    }).join('');
+    return `<table class="kpm-table"><colgroup>
+        <col style="width:15%;"><col style="width:${colWidths[0]};"><col style="width:${colWidths[1]};">
+      </colgroup>${rows}</table>`;
+  }
+  const pmkTableHtml = buildSidebarTable_('AMALAN PEDAGOGI MASA KINI (PMK)', PMK_ITEMS, ['34%','51%']);
+  const kiTableHtml = buildSidebarTable_('KEMAHIRAN INSANIAH (KI)', KI_ITEMS, ['34%','51%']);
 
   // Standard Kandungan/Pembelajaran: kalau ada >1 baris, papar bersebelahan (ikut borang asal)
   function multiCellRow(label, text){
     const lines = String(text||'').split('\n').map(s=>s.trim()).filter(s=>s!=='');
     if(lines.length <= 1){
-      return `<div class="c-row"><div class="c-label">${esc(label)}</div><div class="c-val">${esc(text||'')}</div></div>`;
+      return `<tr><td class="label-cell" style="text-align:left;">${esc(label)}</td><td colspan="4">${esc(text||'')}</td></tr>`;
     }
-    const cells = lines.map((l,i)=>`<div style="flex:1;padding:7px 10px;${i<lines.length-1?'border-right:1px solid #ddd;':''}white-space:pre-wrap;">${esc(l)}</div>`).join('');
-    return `<div class="c-row"><div class="c-label">${esc(label)}</div><div style="flex:1;display:flex;">${cells}</div></div>`;
+    const cells = lines.map((l,i)=>`<div style="flex:1;padding:0 10px 0 0;${i<lines.length-1?'border-right:1px solid #000;margin-right:10px;':''}white-space:pre-wrap;">${esc(l)}</div>`).join('');
+    return `<tr><td class="label-cell" style="text-align:left;">${esc(label)}</td><td colspan="4"><div style="display:flex;">${cells}</div></td></tr>`;
   }
   function objektifBlock(text){
     const lines = String(text||'').split('\n').map(s=>s.trim()).filter(s=>s!=='');
     const items = lines.map(l=>`<li style="margin-bottom:3px;">${esc(l.replace(/^\d+[.)]\s*/,''))}</li>`).join('');
-    return `<div class="c-row"><div class="c-label">Objektif Pembelajaran</div>
-      <div class="c-val" style="white-space:normal;">Pada akhir pembelajaran, murid dapat:
-      <ol style="margin:4px 0 0;padding-left:20px;">${items}</ol></div></div>`;
+    return `<tr><td class="label-cell" style="text-align:left;">Objektif Pembelajaran</td>
+      <td colspan="4" style="white-space:normal;">Pada akhir pembelajaran, murid dapat:
+      <ol style="margin:4px 0 0;padding-left:20px;">${items}</ol></td></tr>`;
   }
   function kriteriaBlock(text){
     const full = 'Murid berjaya:\n' + String(text||'');
-    return `<div class="c-row"><div class="c-label">Kriteria Kejayaan</div><div class="c-val">${esc(full)}</div></div>`;
+    return `<tr><td class="label-cell" style="text-align:left;">Kriteria Kejayaan</td><td colspan="4">${esc(full)}</td></tr>`;
+  }
+  function plainRow(label, text){
+    return `<tr><td class="label-cell" style="text-align:left;">${esc(label)}</td><td colspan="4">${esc(text||'')}</td></tr>`;
   }
 
-  const aktRows = (d.aktiviti||[]).map(a=>{
+  // Aktiviti PdPC: jadual sebenar, label "AKTIVITI PdPC" guna rowspan merentasi baris header + semua data
+  const aktivitiList = d.aktiviti || [];
+  const aktTotalRows = Math.max(aktivitiList.length, 1) + 1; // +1 untuk baris header lajur
+  const aktHeaderRow = `<tr>
+      <td rowspan="${aktTotalRows}" class="label-cell" style="width:15%;">AKTIVITI PdPC</td>
+      <td class="head-cell no-caps">Langkah / Masa</td>
+      <td class="head-cell no-caps">Isi Pelajaran</td>
+      <td class="head-cell no-caps">Aktiviti Pembelajaran</td>
+      <td class="head-cell no-caps">Catatan</td>
+    </tr>`;
+  const aktDataRows = aktivitiList.length ? aktivitiList.map(a=>{
     const imgSrcs = pautanImgSources(a.pautan);
     const imgHtml = imgSrcs.map(src=>`<img src="${esc(src)}" style="max-width:100%;max-height:140px;border-radius:4px;margin-top:6px;display:block;">`).join('');
     const linkHtml = a.pautan ? `<div style="margin-top:4px;font-size:10.5px;color:#555;word-break:break-all;white-space:pre-wrap;">Pautan: ${esc(a.pautan)}</div>` : '';
-    return `
-    <div class="akt-r">
-      <div style="flex:0 0 14%;">${esc(a.langkah)}${a.masa? '\n('+esc(a.masa)+')':''}</div>
-      <div style="flex:0 0 22%;">${esc(a.isiPelajaran)}${imgHtml}${linkHtml}</div>
-      <div style="flex:0 0 36%;">${esc(a.aktiviti)}</div>
-      <div style="flex:1;">${esc(a.catatan)}</div>
-    </div>`;
-  }).join('');
+    const langkahMasa = `${esc(a.langkah)}${a.masa? '\n('+esc(a.masa)+')':''}`;
+    return `<tr>
+      <td>${langkahMasa}</td>
+      <td>${esc(a.isiPelajaran)}${imgHtml}${linkHtml}</td>
+      <td>${esc(a.aktiviti)}</td>
+      <td>${esc(a.catatan)}</td>
+    </tr>`;
+  }).join('') : `<tr><td colspan="4" style="text-align:center;color:#888;">(Tiada aktiviti didaftarkan)</td></tr>`;
+  const aktTableHtml = `<table class="kpm-table"><colgroup>
+      <col style="width:15%;"><col style="width:12%;"><col style="width:19%;"><col style="width:31%;"><col style="width:23%;">
+    </colgroup>${aktHeaderRow}${aktDataRows}</table>`;
 
   const tarikhStr = d.tarikh ? new Date(d.tarikh).toLocaleDateString('ms-MY',{day:'2-digit',month:'2-digit',year:'numeric'}) : '';
 
   document.getElementById('cetak-doc').innerHTML = `
     <h2>Rancangan Pengajaran Harian Pendidikan Seni Visual</h2>
 
-    <div class="c-hdr-row">
-      <div style="flex:0 0 10%;">Minggu</div>
-      <div style="flex:0 0 24%;">Tarikh Dan Hari</div>
-      <div style="flex:0 0 10%;">Tahun</div>
-      <div style="flex:0 0 22%;">Masa / Tempoh</div>
-      <div style="flex:1;">Mata Pelajaran</div>
-    </div>
-    <div class="c-val-row">
-      <div style="flex:0 0 10%;">${esc(d.minggu)}</div>
-      <div style="flex:0 0 13%;">${esc(tarikhStr)}</div>
-      <div style="flex:0 0 11%;">${esc(d.hari)}</div>
-      <div style="flex:0 0 10%;">${esc(d.tahun)}</div>
-      <div style="flex:0 0 22%;">${esc(d.masa)}</div>
-      <div style="flex:1;">${esc(d.mataPelajaran)}</div>
-    </div>
-    <div class="c-pair">
-      <div><div class="c-label">Bidang</div><div class="c-val">${esc(d.bidang)}</div></div>
-      <div><div class="c-label">Tema</div><div class="c-val">${esc(d.tema)}</div></div>
-    </div>
-    <div class="c-pair">
-      <div><div class="c-label">Teknik</div><div class="c-val">${esc(d.teknik)}</div></div>
-      <div><div class="c-label">Tajuk</div><div class="c-val">${esc(d.tajuk)}</div></div>
-    </div>
-    ${multiCellRow('Standard Kandungan', d.stdKandungan)}
-    ${multiCellRow('Standard Pembelajaran', d.stdPembelajaran)}
-    ${objektifBlock(d.objektif)}
-    ${kriteriaBlock(d.kriteria)}
-    <div class="c-row"><div class="c-label">Bahan Bantu Mengajar (BBM)</div><div class="c-val">${esc(d.bbm)}</div></div>
-    <div class="c-row"><div class="c-label">Bahan Bantu Belajar (BBB)</div><div class="c-val">${esc(d.bbb)}</div></div>
-    <div class="c-row"><div class="c-label">Kemahiran Sedia Ada</div><div class="c-val">${esc(d.kemahiran)}</div></div>
+    <table class="kpm-table"><colgroup>
+        <col style="width:15%;"><col style="width:24%;"><col style="width:10%;"><col style="width:15%;"><col style="width:36%;">
+      </colgroup>
+      <tr>
+        <td class="head-cell">Minggu</td><td class="head-cell">Tarikh Dan Hari</td>
+        <td class="head-cell">Tahun</td><td class="head-cell">Masa / Tempoh</td><td class="head-cell">Mata Pelajaran</td>
+      </tr>
+      <tr>
+        <td style="text-align:center;">${esc(d.minggu)}</td>
+        <td style="text-align:center;">${esc(tarikhStr)} (${esc(d.hari)})</td>
+        <td style="text-align:center;">${esc(d.tahun)}</td>
+        <td style="text-align:center;" colspan="1">${esc(d.masa)}</td>
+        <td style="text-align:center;">${esc(d.mataPelajaran)}</td>
+      </tr>
+      <tr><td class="label-cell" style="text-align:left;">Bidang</td><td colspan="2">${esc(d.bidang)}</td><td class="label-cell" style="text-align:left;">Tema</td><td>${esc(d.tema)}</td></tr>
+      <tr><td class="label-cell" style="text-align:left;">Teknik</td><td colspan="2">${esc(d.teknik)}</td><td class="label-cell" style="text-align:left;">Tajuk</td><td>${esc(d.tajuk)}</td></tr>
+      ${multiCellRow('Standard Kandungan', d.stdKandungan)}
+      ${multiCellRow('Standard Pembelajaran', d.stdPembelajaran)}
+      ${objektifBlock(d.objektif)}
+      ${kriteriaBlock(d.kriteria)}
+      ${plainRow('Bahan Bantu Mengajar (BBM)', d.bbm)}
+      ${plainRow('Bahan Bantu Belajar (BBB)', d.bbb)}
+      ${plainRow('Kemahiran Sedia Ada', d.kemahiran)}
+    </table>
 
-    <div class="c-side-by-side">
-      <div class="kbat-label"><span style="font-weight:700;font-size:12px;">KEMAHIRAN BERFIKIR ARAS TINGGI (KBAT)</span><span style="display:block;font-weight:700;font-style:italic;font-size:12px;margin-top:6px;">(Tandakan (/) pada KBAT yang digunakan dalam PdPc)</span></div>
-      <div class="kbat-grid-wrap">${kbatRowsHtml}</div>
-      <div class="emk-label">ELEMEN MERENTAS KURIKULUM (EMK)</div>
-      <div class="emk-grid-wrap">${emkRowsHtml}</div>
-    </div>
+    ${kbatEmkTableHtml}
 
-    <div class="c-section">AMALAN PEDAGOGI MASA KINI (PMK)</div>
-    ${pmkRows}
+    ${pmkTableHtml}
 
-    <div class="c-section">KEMAHIRAN INSANIAH (KI)</div>
-    ${kiRows}
+    ${kiTableHtml}
 
-    <div class="akt-wrap">
-      <div class="akt-label">AKTIVITI PdPC</div>
-      <div style="flex:1;display:flex;flex-direction:column;">
-        <div class="akt-r akt-head">
-          <div style="flex:0 0 14%;">Langkah / Masa</div>
-          <div style="flex:0 0 22%;">Isi Pelajaran</div>
-          <div style="flex:0 0 36%;">Aktiviti Pembelajaran</div>
-          <div style="flex:1;">Catatan</div>
-        </div>
-        ${aktRows || '<div class="akt-r"><div style="flex:1;text-align:center;color:#888;">(Tiada aktiviti didaftarkan)</div></div>'}
-      </div>
-    </div>
+    ${aktTableHtml}
 
-    <div class="c-pair">
-      <div><div class="c-label" style="flex:0 0 150px;">Tahap Penguasaan (PBD)</div><div class="c-val">${esc(d.tahap)}</div></div>
-      <div><div class="c-label" style="flex:0 0 150px;text-align:center;">Pentaksiran</div><div class="c-val">PBD: Senarai Semak</div></div>
-    </div>
-    <div class="c-pair">
-      <div><div class="c-label" style="flex:0 0 150px;">Kehadiran</div><div class="c-val">${esc(d.kehadiran)}</div></div>
-      <div><div class="c-label" style="flex:0 0 150px;text-align:center;">Bil. Murid Yang Menghantar Tugasan</div><div class="c-val">${esc(d.bilMurid)}</div></div>
-    </div>
+    <table class="kpm-table"><colgroup>
+        <col style="width:15%;"><col style="width:35%;"><col style="width:15%;"><col style="width:35%;">
+      </colgroup>
+      <tr><td class="label-cell" style="text-align:left;">Tahap Penguasaan (PBD)</td><td>${esc(d.tahap)}</td>
+        <td class="label-cell">Pentaksiran</td><td>PBD: Senarai Semak</td></tr>
+      <tr><td class="label-cell" style="text-align:left;">Kehadiran</td><td>${esc(d.kehadiran)}</td>
+        <td class="label-cell">Bil. Murid Yang Menghantar Tugasan</td><td>${esc(d.bilMurid)}</td></tr>
+    </table>
 
     <div class="c-empty-box"><span class="lbl">Refleksi:</span>${esc(d.refleksi)}</div>
     <div class="c-empty-box"><span class="lbl">Ulasan Guru Pembimbing / Pensyarah Penyelia:</span></div>
