@@ -8,7 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --navy:#1B3A6B; --navy-dark:#122748; --gold:#C08A3E; --crimson:#A23B3B;
+    --navy:#1B3A6B; --navy-dark:#122748; --gold:#C08A3E; --crimson:#A23B3B; --field-blue:#5DADE2;
     --bg:#F5F6F8; --card:#FFFFFF; --border:#E1E4EA; --text:#1F2430; --muted:#6B7280;
     --ok:#2F855A; --radius:12px;
   }
@@ -87,24 +87,52 @@
   /* --- Cetak (print) view --- */
   #cetak-doc{background:#fff;border:1px solid var(--border);border-radius:10px;padding:26px;
     font-size:12.5px;line-height:1.5;}
-  #cetak-doc h2{text-align:center;font-size:17px;margin-bottom:18px;}
+  #cetak-doc h2{text-align:center;font-size:17px;margin:0 0 0;padding:14px;background:var(--navy);color:#fff;
+    font-weight:700;border-radius:4px 4px 0 0;}
   .c-row{display:flex;border:1px solid #ccc;border-top:none;}
   .c-row:first-child{border-top:1px solid #ccc;}
-  .c-label{background:#EDF1F7;font-weight:700;padding:7px 10px;flex:0 0 32%;border-right:1px solid #ccc;
-    font-size:12px;}
+  .c-label{background:var(--field-blue);font-weight:700;padding:7px 10px;flex:0 0 150px;min-width:0;border-right:1px solid #ccc;
+    font-size:12px;color:#0B2545;text-transform:uppercase;letter-spacing:.01em;}
   .c-val{padding:7px 10px;flex:1;white-space:pre-wrap;}
   .c-pair{display:flex;border:1px solid #ccc;border-top:none;}
   .c-pair > div{flex:1;display:flex;}
-  .c-pair .c-label{flex:0 0 90px;}
-  .c-section{background:var(--navy);color:#fff;text-align:center;font-weight:700;padding:6px;
-    margin-top:14px;font-size:12.5px;}
+  .c-pair .c-label{flex:0 0 150px;}
+  .c-hdr-row{display:flex;border:1px solid #ccc;border-top:none;background:var(--field-blue);}
+  .c-hdr-row>div{padding:5px 6px;border-right:1px solid #ccc;font-weight:700;font-size:12px;
+    text-align:center;text-transform:uppercase;letter-spacing:.02em;color:#0B2545;}
+  .c-hdr-row>div:last-child{border-right:none;}
+  .c-val-row{display:flex;border:1px solid #ccc;border-top:none;}
+  .c-val-row>div{padding:6px 8px;border-right:1px solid #ccc;font-size:11.5px;text-align:center;white-space:pre-wrap;}
+  .c-val-row>div:last-child{border-right:none;}
+  .c-empty-box{border:1px solid #ccc;border-top:none;min-height:60px;padding:8px 10px;}
+  .c-empty-box .lbl{font-weight:700;font-size:12px;margin-bottom:4px;display:block;}
+  .c-side-by-side{display:flex;gap:0;margin-top:0;border:1px solid #ccc;border-top:none;}
+  .kbat-label{flex:0 0 150px;background:var(--field-blue);color:#0B2545;font-weight:700;text-align:center;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px 8px;font-size:12px;
+    border-right:1px solid #ccc;line-height:1.4;}
+  .kbat-grid-wrap{flex:0 0 32%;display:flex;flex-direction:column;border-right:1px solid #ccc;}
+  .kbat-r{display:flex;flex:0 0 auto;border-bottom:1px solid #ccc;}
+  .kbat-r.grow{flex:1;}
+  .kbat-r:last-child{border-bottom:none;}
+  .kbat-r .term{flex:1;display:flex;align-items:center;padding:8px 10px;font-size:12px;border-right:1px solid #eee;}
+  .kbat-r .chk{flex:0 0 26px;display:flex;align-items:center;justify-content:center;font-size:12px;border-right:1px solid #eee;}
+  .emk-label{flex:0 0 13%;background:var(--field-blue);color:#0B2545;font-weight:700;text-align:center;
+    display:flex;align-items:center;justify-content:center;padding:10px 8px;font-size:12px;
+    border-right:1px solid #ccc;line-height:1.4;}
+  .emk-grid-wrap{flex:1;display:flex;flex-direction:column;}
+  .emk-r{display:flex;flex:1;border-bottom:1px solid #eee;}
+  .emk-r:last-child{border-bottom:none;}
+  .emk-r .item{flex:0 0 42%;padding:6px 10px;font-size:11.5px;font-weight:600;border-right:1px solid #eee;display:flex;align-items:center;}
+  .emk-r .note{flex:1;padding:6px 10px;font-size:11.5px;display:flex;align-items:center;white-space:pre-wrap;}
+  .c-section{background:var(--field-blue);color:#0B2545;text-align:center;font-weight:700;padding:6px;
+    margin-top:0;font-size:12.5px;border:1px solid #ccc;border-top:none;}
   .c-grid2{border:1px solid #ccc;border-top:none;}
   .c-grid2 .c-gitem{display:flex;border-bottom:1px solid #eee;}
   .c-grid2 .c-gitem:last-child{border-bottom:none;}
   .c-grid2 .c-gitem > div{flex:1;padding:6px 9px;font-size:12px;border-right:1px solid #eee;}
   .c-grid2 .c-gitem > div:last-child{border-right:none;}
   .c-item1{border:1px solid #ccc;border-top:none;display:flex;}
-  .c-item1 .c-label{flex:0 0 42%;}
+  .c-item1 .c-label{flex:0 0 42%;background:transparent;color:var(--text);text-transform:none;font-weight:600;}
   table.c-akt{width:100%;border-collapse:collapse;margin-top:0;}
   table.c-akt th,table.c-akt td{border:1px solid #ccc;padding:6px 8px;font-size:11.5px;
     vertical-align:top;white-space:pre-wrap;}
@@ -605,8 +633,7 @@ function openCetakFromList(id){
 }
 
 function markLine(val, label){
-  const used = val && String(val).trim() !== '';
-  return `<b>${used?'☑':'☐'} ${esc(label)}</b>`;
+  return `<b>${esc(label)}</b>`;
 }
 function catatanOrDash(val){
   const v = val && String(val).trim() !== '' ? val : '\u2013';
@@ -614,25 +641,47 @@ function catatanOrDash(val){
 }
 
 function renderCetak(d){
-  const emkRows = [];
-  for(let i=0;i<EMK_ITEMS.length;i+=2){
-    const [k1,l1] = EMK_ITEMS[i];
-    const pair2 = EMK_ITEMS[i+1];
-    emkRows.push(`
-      <div class="c-gitem">
-        <div style="flex:0 0 26%;">${markLine(d[k1], l1)}</div>
-        <div>${catatanOrDash(d[k1])}</div>
-        ${pair2 ? `<div style="flex:0 0 26%;">${markLine(d[pair2[0]], pair2[1])}</div><div>${catatanOrDash(d[pair2[0]])}</div>` : '<div style="flex:0 0 26%;"></div><div></div>'}
-      </div>`);
-  }
+  // EMK ialah SATU lajur (10 baris) dengan label biru menegak di sebelah kiri
+  const emkRowsHtml = EMK_ITEMS.map(([k,l])=>{
+    return `<div class="emk-r"><div class="item">${esc(l)}</div><div class="note">${catatanOrDash(d[k])}</div></div>`;
+  }).join('');
   const pmkRows = PMK_ITEMS.map(([k,l])=>`
     <div class="c-item1"><div class="c-label">${markLine(d[k],l)}</div><div class="c-val">${catatanOrDash(d[k])}</div></div>`).join('');
   const kiRows = KI_ITEMS.map(([k,l])=>`
     <div class="c-item1"><div class="c-label">${markLine(d[k],l)}</div><div class="c-val">${catatanOrDash(d[k])}</div></div>`).join('');
-  const kbatRows = [];
-  for(let i=0;i<KBAT_ITEMS.length;i+=2){
-    const [k1,l1]=KBAT_ITEMS[i]; const [k2,l2]=KBAT_ITEMS[i+1];
-    kbatRows.push(`<div class="c-gitem"><div>${markLine(d[k1],l1)}</div><div>${markLine(d[k2],l2)}</div></div>`);
+
+  // KBAT: grid 4-lajur (Terma | Tanda | Terma | Tanda), 3 baris; baris terakhir stretch turun
+  function chkMark(name){ return d[name] === true ? '\u2713' : ''; }
+  const kbatPairs = [
+    ['kbatMengingat','Mengingat','kbatMenganalisis','Menganalisis'],
+    ['kbatMemahami','Memahami','kbatMenilai','Menilai'],
+    ['kbatMengaplikasi','Mengaplikasi','kbatMencipta','Mencipta']
+  ];
+  const kbatRowsHtml = kbatPairs.map(([k1,l1,k2,l2],i)=>`
+    <div class="kbat-r${i===kbatPairs.length-1?' grow':''}">
+      <div class="term">${esc(l1)}</div><div class="chk">${chkMark(k1)}</div>
+      <div class="term">${esc(l2)}</div><div class="chk">${chkMark(k2)}</div>
+    </div>`).join('');
+
+  // Standard Kandungan/Pembelajaran: kalau ada >1 baris, papar bersebelahan (ikut borang asal)
+  function multiCellRow(label, text){
+    const lines = String(text||'').split('\n').map(s=>s.trim()).filter(s=>s!=='');
+    if(lines.length <= 1){
+      return `<div class="c-row"><div class="c-label">${esc(label)}</div><div class="c-val">${esc(text||'')}</div></div>`;
+    }
+    const cells = lines.map((l,i)=>`<div style="flex:1;padding:7px 10px;${i<lines.length-1?'border-right:1px solid #ddd;':''}white-space:pre-wrap;">${esc(l)}</div>`).join('');
+    return `<div class="c-row"><div class="c-label">${esc(label)}</div><div style="flex:1;display:flex;">${cells}</div></div>`;
+  }
+  function objektifBlock(text){
+    const lines = String(text||'').split('\n').map(s=>s.trim()).filter(s=>s!=='');
+    const items = lines.map(l=>`<li style="margin-bottom:3px;">${esc(l.replace(/^\d+[.)]\s*/,''))}</li>`).join('');
+    return `<div class="c-row"><div class="c-label">Objektif Pembelajaran</div>
+      <div class="c-val" style="white-space:normal;">Pada akhir pembelajaran, murid dapat:
+      <ol style="margin:4px 0 0;padding-left:20px;">${items}</ol></div></div>`;
+  }
+  function kriteriaBlock(text){
+    const full = 'Murid berjaya:\n' + String(text||'');
+    return `<div class="c-row"><div class="c-label">Kriteria Kejayaan</div><div class="c-val">${esc(full)}</div></div>`;
   }
 
   const aktRows = (d.aktiviti||[]).map(a=>`
@@ -646,38 +695,45 @@ function renderCetak(d){
   const tarikhStr = d.tarikh ? new Date(d.tarikh).toLocaleDateString('ms-MY',{day:'2-digit',month:'2-digit',year:'numeric'}) : '';
 
   document.getElementById('cetak-doc').innerHTML = `
-    <h2>RANCANGAN PENGAJARAN HARIAN<br>PENDIDIKAN SENI VISUAL</h2>
+    <h2>Rancangan Pengajaran Harian Pendidikan Seni Visual</h2>
 
-    <div class="c-pair">
-      <div><div class="c-label" style="flex:0 0 70px;">Minggu</div><div class="c-val">${esc(d.minggu)}</div></div>
-      <div><div class="c-label" style="flex:0 0 110px;">Tarikh &amp; Hari</div><div class="c-val">${esc(tarikhStr)} (${esc(d.hari)})</div></div>
+    <div class="c-hdr-row">
+      <div style="flex:0 0 10%;">Minggu</div>
+      <div style="flex:0 0 24%;">Tarikh Dan Hari</div>
+      <div style="flex:0 0 10%;">Tahun</div>
+      <div style="flex:0 0 22%;">Masa / Tempoh</div>
+      <div style="flex:1;">Mata Pelajaran</div>
+    </div>
+    <div class="c-val-row">
+      <div style="flex:0 0 10%;">${esc(d.minggu)}</div>
+      <div style="flex:0 0 13%;">${esc(tarikhStr)}</div>
+      <div style="flex:0 0 11%;">${esc(d.hari)}</div>
+      <div style="flex:0 0 10%;">${esc(d.tahun)}</div>
+      <div style="flex:0 0 22%;">${esc(d.masa)}</div>
+      <div style="flex:1;">${esc(d.mataPelajaran)}</div>
     </div>
     <div class="c-pair">
-      <div><div class="c-label" style="flex:0 0 70px;">Tahun</div><div class="c-val">${esc(d.tahun)}</div></div>
-      <div><div class="c-label" style="flex:0 0 110px;">Masa</div><div class="c-val">${esc(d.masa)}</div></div>
-    </div>
-    <div class="c-row"><div class="c-label">Mata Pelajaran</div><div class="c-val">${esc(d.mataPelajaran)}</div></div>
-    <div class="c-pair">
-      <div><div class="c-label" style="flex:0 0 70px;">Bidang</div><div class="c-val">${esc(d.bidang)}</div></div>
-      <div><div class="c-label" style="flex:0 0 70px;">Tema</div><div class="c-val">${esc(d.tema)}</div></div>
+      <div><div class="c-label">Bidang</div><div class="c-val">${esc(d.bidang)}</div></div>
+      <div><div class="c-label">Tema</div><div class="c-val">${esc(d.tema)}</div></div>
     </div>
     <div class="c-pair">
-      <div><div class="c-label" style="flex:0 0 70px;">Teknik</div><div class="c-val">${esc(d.teknik)}</div></div>
-      <div><div class="c-label" style="flex:0 0 70px;">Tajuk</div><div class="c-val">${esc(d.tajuk)}</div></div>
+      <div><div class="c-label">Teknik</div><div class="c-val">${esc(d.teknik)}</div></div>
+      <div><div class="c-label">Tajuk</div><div class="c-val">${esc(d.tajuk)}</div></div>
     </div>
-    <div class="c-row"><div class="c-label">Standard Kandungan</div><div class="c-val">${esc(d.stdKandungan)}</div></div>
-    <div class="c-row"><div class="c-label">Standard Pembelajaran</div><div class="c-val">${esc(d.stdPembelajaran)}</div></div>
-    <div class="c-row"><div class="c-label">Objektif Pembelajaran</div><div class="c-val">${esc(d.objektif)}</div></div>
-    <div class="c-row"><div class="c-label">Kriteria Kejayaan</div><div class="c-val">${esc(d.kriteria)}</div></div>
-    <div class="c-row"><div class="c-label">BBM</div><div class="c-val">${esc(d.bbm)}</div></div>
-    <div class="c-row"><div class="c-label">BBB</div><div class="c-val">${esc(d.bbb)}</div></div>
+    ${multiCellRow('Standard Kandungan', d.stdKandungan)}
+    ${multiCellRow('Standard Pembelajaran', d.stdPembelajaran)}
+    ${objektifBlock(d.objektif)}
+    ${kriteriaBlock(d.kriteria)}
+    <div class="c-row"><div class="c-label">Bahan Bantu Mengajar (BBM)</div><div class="c-val">${esc(d.bbm)}</div></div>
+    <div class="c-row"><div class="c-label">Bahan Bantu Belajar (BBB)</div><div class="c-val">${esc(d.bbb)}</div></div>
     <div class="c-row"><div class="c-label">Kemahiran Sedia Ada</div><div class="c-val">${esc(d.kemahiran)}</div></div>
 
-    <div class="c-section">KEMAHIRAN BERFIKIR ARAS TINGGI (KBAT)</div>
-    <div class="c-grid2">${kbatRows.join('')}</div>
-
-    <div class="c-section">ELEMEN MERENTAS KURIKULUM (EMK)</div>
-    <div class="c-grid2">${emkRows.join('')}</div>
+    <div class="c-side-by-side">
+      <div class="kbat-label"><span style="font-weight:700;font-size:12px;">KEMAHIRAN BERFIKIR ARAS TINGGI (KBAT)</span><span style="display:block;font-weight:400;font-style:italic;font-size:10px;margin-top:6px;">(Tandakan (/) pada KBAT yang digunakan dalam PdPc)</span></div>
+      <div class="kbat-grid-wrap">${kbatRowsHtml}</div>
+      <div class="emk-label">ELEMEN MERENTAS KURIKULUM (EMK)</div>
+      <div class="emk-grid-wrap">${emkRowsHtml}</div>
+    </div>
 
     <div class="c-section">AMALAN PEDAGOGI MASA KINI (PMK)</div>
     ${pmkRows}
@@ -692,10 +748,17 @@ function renderCetak(d){
       ${aktRows || '<tr><td colspan="4" style="text-align:center;color:#888;">(Tiada aktiviti didaftarkan)</td></tr>'}
     </table>
 
-    <div class="c-row" style="margin-top:14px;"><div class="c-label">Refleksi</div><div class="c-val">${esc(d.refleksi)}</div></div>
-    <div class="c-row"><div class="c-label">Tahap Penguasaan (PBD)</div><div class="c-val">${esc(d.tahap)}</div></div>
-    <div class="c-row"><div class="c-label">Kehadiran</div><div class="c-val">${esc(d.kehadiran)}</div></div>
-    <div class="c-row"><div class="c-label">Bil. Murid Hantar Tugasan</div><div class="c-val">${esc(d.bilMurid)}</div></div>
+    <div class="c-pair">
+      <div><div class="c-label" style="flex:0 0 130px;">Tahap Penguasaan (PBD)</div><div class="c-val">${esc(d.tahap)}</div></div>
+      <div><div class="c-label" style="flex:0 0 100px;">Pentaksiran</div><div class="c-val">PBD: Senarai Semak</div></div>
+    </div>
+    <div class="c-pair">
+      <div><div class="c-label" style="flex:0 0 130px;">Kehadiran</div><div class="c-val">${esc(d.kehadiran)}</div></div>
+      <div><div class="c-label" style="flex:0 0 100px;">Bil. Murid Hantar Tugasan</div><div class="c-val">${esc(d.bilMurid)}</div></div>
+    </div>
+
+    <div class="c-empty-box"><span class="lbl">Refleksi:</span>${esc(d.refleksi)}</div>
+    <div class="c-empty-box"><span class="lbl">Ulasan Guru Pembimbing / Pensyarah Penyelia:</span></div>
 
     <div class="c-sig">
       <div>Tandatangan Guru Pelatih:\n\n\n_____________________\n(${esc(d.namaPelatih)})\nGuru Pelatih, IPG Kampus Sarawak\nTarikh: ${esc(tarikhStr)}</div>
