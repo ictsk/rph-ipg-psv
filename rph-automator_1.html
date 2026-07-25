@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>eRPH Automator — SK Krangan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#1B3A6B; --navy-dark:#122748; --gold:#C08A3E; --crimson:#A23B3B;
+    --bg:#F5F6F8; --card:#FFFFFF; --border:#E1E4EA; --text:#1F2430; --muted:#6B7280;
+    --ok:#2F855A; --radius:12px;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;}
+  h1,h2,h3{font-family:'Fraunces',serif;font-weight:600;margin:0;}
+  header{position:sticky;top:0;z-index:20;background:var(--navy);color:#fff;padding:14px 20px;
+    display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 8px rgba(0,0,0,.15);}
+  header h1{font-size:19px;color:#fff;}
+  header .sub{font-size:12px;color:#C9D4E6;font-family:'Plus Jakarta Sans',sans-serif;margin-top:2px;}
+  .btn{border:none;border-radius:8px;padding:10px 16px;font-family:'Plus Jakarta Sans',sans-serif;
+    font-weight:600;font-size:13.5px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;
+    transition:transform .08s ease, box-shadow .15s ease;}
+  .btn:active{transform:scale(.97);}
+  .btn-gold{background:var(--gold);color:#fff;}
+  .btn-gold:hover{box-shadow:0 4px 12px rgba(192,138,62,.4);}
+  .btn-outline{background:#fff;color:var(--navy);border:1.5px solid var(--border);}
+  .btn-outline:hover{border-color:var(--navy);}
+  .btn-crimson{background:var(--crimson);color:#fff;}
+  .btn-navy{background:var(--navy);color:#fff;}
+  .btn-sm{padding:6px 11px;font-size:12.5px;border-radius:7px;}
+  main{max-width:980px;margin:0 auto;padding:22px 16px 80px;}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+    margin-bottom:16px;overflow:hidden;}
+  .card-head{background:var(--navy);color:#fff;padding:12px 18px;font-family:'Fraunces',serif;
+    font-size:15.5px;font-weight:600;display:flex;align-items:center;justify-content:space-between;}
+  .card-body{padding:18px;}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;}
+  @media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
+  label{display:block;font-size:12.5px;font-weight:600;color:var(--muted);margin-bottom:5px;}
+  input[type=text],input[type=date],select,textarea{
+    width:100%;padding:9px 11px;border:1.5px solid var(--border);border-radius:8px;
+    font-family:'Plus Jakarta Sans',sans-serif;font-size:13.5px;color:var(--text);background:#fff;}
+  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--navy);}
+  textarea{resize:vertical;min-height:64px;}
+  .field{margin-bottom:12px;}
+  .hint{font-size:11.5px;color:var(--muted);margin-top:4px;}
+  /* --- List view --- */
+  .rph-card{background:#fff;border:1px solid var(--border);border-radius:10px;padding:14px 16px;
+    display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;gap:10px;flex-wrap:wrap;}
+  .rph-card .info b{font-family:'Fraunces',serif;font-size:15px;}
+  .rph-card .meta{font-size:12px;color:var(--muted);margin-top:3px;}
+  .badge{display:inline-block;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:700;
+    text-transform:uppercase;letter-spacing:.03em;}
+  .badge-draf{background:#FEF3C7;color:#92400E;}
+  .badge-semak{background:#DBEAFE;color:#1E40AF;}
+  .badge-cetak{background:#D1FAE5;color:#065F46;}
+  .empty{text-align:center;padding:60px 20px;color:var(--muted);}
+  /* --- Checklist items (EMK/PMK/KI) --- */
+  .chk-item{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px dashed var(--border);}
+  .chk-item:last-child{border-bottom:none;}
+  .chk-mark{width:20px;height:20px;border-radius:5px;border:1.5px solid var(--border);flex:0 0 20px;
+    display:flex;align-items:center;justify-content:center;font-size:13px;color:#fff;margin-top:2px;}
+  .chk-mark.on{background:var(--ok);border-color:var(--ok);}
+  .chk-body{flex:1;min-width:0;}
+  .chk-label{font-size:13px;font-weight:600;margin-bottom:4px;}
+  .kbat-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px 20px;}
+  .kbat-item{display:flex;align-items:center;gap:8px;}
+  .kbat-item input{width:auto;}
+  /* --- Aktiviti list --- */
+  .akt-item{border:1.5px solid var(--border);border-radius:10px;padding:14px;margin-bottom:12px;position:relative;}
+  .akt-item .akt-num{position:absolute;top:-10px;left:14px;background:var(--gold);color:#fff;
+    font-size:11px;font-weight:700;padding:2px 9px;border-radius:20px;}
+  .akt-remove{position:absolute;top:10px;right:10px;background:none;border:none;color:var(--crimson);
+    font-size:18px;cursor:pointer;line-height:1;}
+  .add-row{width:100%;padding:12px;border:1.5px dashed var(--gold);border-radius:10px;background:#FFF9F0;
+    color:var(--gold);font-weight:700;cursor:pointer;font-size:13.5px;}
+  .toolbar{display:flex;gap:10px;justify-content:flex-end;margin-top:6px;flex-wrap:wrap;}
+  .toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:var(--navy-dark);
+    color:#fff;padding:12px 20px;border-radius:10px;font-size:13.5px;z-index:100;opacity:0;
+    transition:opacity .25s;pointer-events:none;}
+  .toast.show{opacity:1;}
+  .loading{text-align:center;padding:40px;color:var(--muted);}
+  #view-form, #view-cetak{display:none;}
+  /* --- Cetak (print) view --- */
+  #cetak-doc{background:#fff;border:1px solid var(--border);border-radius:10px;padding:26px;
+    font-size:12.5px;line-height:1.5;}
+  #cetak-doc h2{text-align:center;font-size:17px;margin-bottom:18px;}
+  .c-row{display:flex;border:1px solid #ccc;border-top:none;}
+  .c-row:first-child{border-top:1px solid #ccc;}
+  .c-label{background:#EDF1F7;font-weight:700;padding:7px 10px;flex:0 0 32%;border-right:1px solid #ccc;
+    font-size:12px;}
+  .c-val{padding:7px 10px;flex:1;white-space:pre-wrap;}
+  .c-pair{display:flex;border:1px solid #ccc;border-top:none;}
+  .c-pair > div{flex:1;display:flex;}
+  .c-pair .c-label{flex:0 0 90px;}
+  .c-section{background:var(--navy);color:#fff;text-align:center;font-weight:700;padding:6px;
+    margin-top:14px;font-size:12.5px;}
+  .c-grid2{border:1px solid #ccc;border-top:none;}
+  .c-grid2 .c-gitem{display:flex;border-bottom:1px solid #eee;}
+  .c-grid2 .c-gitem:last-child{border-bottom:none;}
+  .c-grid2 .c-gitem > div{flex:1;padding:6px 9px;font-size:12px;border-right:1px solid #eee;}
+  .c-grid2 .c-gitem > div:last-child{border-right:none;}
+  .c-item1{border:1px solid #ccc;border-top:none;display:flex;}
+  .c-item1 .c-label{flex:0 0 42%;}
+  table.c-akt{width:100%;border-collapse:collapse;margin-top:0;}
+  table.c-akt th,table.c-akt td{border:1px solid #ccc;padding:6px 8px;font-size:11.5px;
+    vertical-align:top;white-space:pre-wrap;}
+  table.c-akt th{background:#EDF1F7;}
+  .c-sig{display:flex;gap:16px;margin-top:20px;}
+  .c-sig div{flex:1;font-size:11.5px;white-space:pre-wrap;}
+  @media print{
+    header,.toolbar,#view-list,.no-print{display:none !important;}
+    body{background:#fff;}
+    main{padding:0;max-width:100%;}
+    #cetak-doc{border:none;padding:0;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>eRPH Automator</h1>
+    <div class="sub">SK Krangan · Pendidikan Seni Visual</div>
+  </div>
+  <button class="btn btn-gold no-print" onclick="openNew()">+ RPH Baharu</button>
+</header>
+
+<main>
+
+  <!-- ===================== VIEW: SENARAI ===================== -->
+  <section id="view-list">
+    <div id="list-container" class="loading">Memuatkan senarai RPH…</div>
+  </section>
+
+  <!-- ===================== VIEW: BORANG ===================== -->
+  <section id="view-form">
+    <div class="toolbar no-print" style="margin-bottom:14px;">
+      <button class="btn btn-outline" onclick="switchView('list')">← Kembali</button>
+      <button class="btn btn-outline" onclick="previewCetak()">👁 Pratonton & Cetak</button>
+      <button class="btn btn-navy" onclick="saveForm()">💾 Simpan RPH</button>
+    </div>
+
+    <div class="card">
+      <div class="card-head">Maklumat Am</div>
+      <div class="card-body">
+        <div class="grid3">
+          <div class="field"><label>Minggu</label><input type="text" id="f-minggu"></div>
+          <div class="field"><label>Tarikh</label><input type="date" id="f-tarikh"></div>
+          <div class="field"><label>Hari</label><select id="f-hari"></select></div>
+        </div>
+        <div class="grid3">
+          <div class="field"><label>Tahun</label><select id="f-tahun"></select></div>
+          <div class="field"><label>Masa / Tempoh</label><input type="text" id="f-masa" placeholder="cth: 10.30 - 11.00 Pagi / 30 Minit"></div>
+          <div class="field"><label>Mata Pelajaran</label><select id="f-mataPelajaran"></select></div>
+        </div>
+        <div class="grid2">
+          <div class="field"><label>Bidang</label><select id="f-bidang"></select></div>
+          <div class="field"><label>Tema</label><input type="text" id="f-tema"></div>
+        </div>
+        <div class="grid2">
+          <div class="field"><label>Teknik</label><input type="text" id="f-teknik"></div>
+          <div class="field"><label>Tajuk</label><input type="text" id="f-tajuk"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">Kandungan Pengajaran</div>
+      <div class="card-body">
+        <div class="field"><label>Standard Kandungan</label><textarea id="f-stdKandungan"></textarea>
+          <div class="hint">Ikut DSKP rasmi mengikut Bidang & Tahun.</div></div>
+        <div class="field"><label>Standard Pembelajaran</label><textarea id="f-stdPembelajaran"></textarea></div>
+        <div class="field"><label>Objektif Pembelajaran</label><textarea id="f-objektif" placeholder="Satu baris = satu objektif"></textarea></div>
+        <div class="field"><label>Kriteria Kejayaan</label><textarea id="f-kriteria"></textarea></div>
+        <div class="grid2">
+          <div class="field"><label>BBM (Bahan Bantu Mengajar)</label><textarea id="f-bbm"></textarea></div>
+          <div class="field"><label>BBB (Bahan Bantu Belajar)</label><textarea id="f-bbb"></textarea></div>
+        </div>
+        <div class="field"><label>Kemahiran Sedia Ada</label><textarea id="f-kemahiran"></textarea></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">KBAT — Kemahiran Berfikir Aras Tinggi</div>
+      <div class="card-body"><div class="kbat-grid" id="kbat-grid"></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">EMK — Elemen Merentas Kurikulum</div>
+      <div class="card-body">
+        <div class="hint" style="margin-bottom:8px;">Isi catatan jika elemen digunakan dalam RPH ini. Biarkan kosong jika tidak.</div>
+        <div id="emk-list"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">PMK — Amalan Pedagogi Masa Kini</div>
+      <div class="card-body">
+        <div class="hint" style="margin-bottom:8px;">Isi catatan jika pendekatan ini digunakan. Biarkan kosong jika tidak.</div>
+        <div id="pmk-list"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">KI — Kemahiran Insaniah</div>
+      <div class="card-body">
+        <div class="hint" style="margin-bottom:8px;">Isi catatan jika kemahiran ini ditekankan. Biarkan kosong jika tidak.</div>
+        <div id="ki-list"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        Aktiviti PdPC
+        <span style="font-size:11px;font-weight:400;">Set Induksi, Langkah 1-4, Penutup, dll.</span>
+      </div>
+      <div class="card-body" id="aktiviti-body">
+        <div id="aktiviti-list"></div>
+        <button class="add-row" onclick="addAktiviti()">+ Tambah Langkah Aktiviti</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">Refleksi &amp; Pentaksiran</div>
+      <div class="card-body">
+        <div class="field"><label>Refleksi</label><textarea id="f-refleksi"></textarea></div>
+        <div class="grid3">
+          <div class="field"><label>Tahap Penguasaan (PBD)</label><input type="text" id="f-tahap"></div>
+          <div class="field"><label>Kehadiran</label><input type="text" id="f-kehadiran" placeholder="cth: 6 / 6 orang murid"></div>
+          <div class="field"><label>Bil. Murid Hantar Tugasan</label><input type="text" id="f-bilMurid"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">Tandatangan &amp; Status</div>
+      <div class="card-body">
+        <div class="grid2">
+          <div class="field"><label>Nama Guru Pelatih</label><input type="text" id="f-namaPelatih"></div>
+          <div class="field"><label>Nama Guru Pembimbing</label><input type="text" id="f-namaPembimbing"></div>
+        </div>
+        <div class="grid2">
+          <div class="field"><label>Nama Guru Besar</label><input type="text" id="f-namaBesar"></div>
+          <div class="field"><label>Nama Pensyarah Penyelia</label><input type="text" id="f-namaPensyarah"></div>
+        </div>
+        <div class="field" style="max-width:220px;"><label>Status</label><select id="f-status"></select></div>
+      </div>
+    </div>
+
+    <div class="toolbar no-print">
+      <button class="btn btn-outline" onclick="switchView('list')">← Kembali</button>
+      <button class="btn btn-outline" onclick="previewCetak()">👁 Pratonton & Cetak</button>
+      <button class="btn btn-navy" onclick="saveForm()">💾 Simpan RPH</button>
+    </div>
+  </section>
+
+  <!-- ===================== VIEW: CETAK ===================== -->
+  <section id="view-cetak">
+    <div class="toolbar no-print" style="margin-bottom:14px;">
+      <button class="btn btn-outline" onclick="switchView('form')">← Kembali ke Borang</button>
+      <button class="btn btn-gold" onclick="window.print()">🖨 Cetak</button>
+    </div>
+    <div id="cetak-doc"></div>
+  </section>
+
+</main>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============================================================
+   KONFIGURASI — tampal URL Web App Apps Script (selepas deploy)
+   ============================================================ */
+const API_URL = 'https://script.google.com/macros/s/AKfycbzfZAcg5kfQMNPZJU5WsRVoXVimi7FOJaUVZHUs7oG8Q5YetWTQmSYBRHGIE9uWn7_E/exec';
+
+/* ============================================================
+   RUJUKAN — senarai standard untuk dropdown
+   ============================================================ */
+const RUJUKAN = {
+  hari: ['Isnin','Selasa','Rabu','Khamis','Jumaat'],
+  tahun: ['Tahun 1','Tahun 2','Tahun 3','Tahun 4','Tahun 5','Tahun 6'],
+  bidang: ['Menggambar','Membuat Corak dan Rekaan','Membentuk dan Membuat Binaan','Mengenal Kraf Tradisional'],
+  mataPelajaran: ['Pendidikan Seni Visual','Bahasa Melayu','Bahasa Inggeris','Matematik','Sains',
+    'Reka Bentuk dan Teknologi','Pendidikan Muzik','Pendidikan Islam','Pendidikan Moral','PJPK','Sejarah'],
+  status: ['Draf','Siap Semak','Siap Cetak'],
+  langkah: ['Set Induksi','Langkah 1','Langkah 2','Langkah 3','Langkah 4','Langkah 5','Penutup']
+};
+
+const KBAT_ITEMS = [
+  ['kbatMengingat','Mengingat'], ['kbatMemahami','Memahami'], ['kbatMengaplikasi','Mengaplikasi'],
+  ['kbatMenganalisis','Menganalisis'], ['kbatMenilai','Menilai'], ['kbatMencipta','Mencipta']
+];
+const EMK_ITEMS = [
+  ['emkBahasa','Bahasa'], ['emkNilaiMurni','Nilai Murni'], ['emkSains','Sains dan Teknologi'],
+  ['emkPatriotisme','Patriotisme'], ['emkKreativiti','Kreativiti dan Inovasi'],
+  ['emkKeusahawanan','Keusahawanan'], ['emkTmk','TMK'], ['emkAlamSekitar','Kelestarian Alam Sekitar'],
+  ['emkGlobal','Kelestarian Global'], ['emkKewangan','Pendidikan Kewangan']
+];
+const PMK_ITEMS = [
+  ['pmk6c','Kompetensi 6C (Komunikasi, Kolaboratif, Pemikiran Kritis, Kreativiti, Karakter & Kewarganegaraan)'],
+  ['pmkTerarahKendiri','Pembelajaran Terarah Kendiri'],
+  ['pmkKoperatif','Pembelajaran Koperatif'],
+  ['pmkInkuiri','Pembelajaran Inkuiri-Penemuan'],
+  ['pmkPenerokaan','Pembelajaran Penerokaan'],
+  ['pmkKontekstual','Pembelajaran Kontekstual Terarah'],
+  ['pmkProjek','Pembelajaran Berasaskan Projek'],
+  ['pmkMasalah','Pembelajaran Berasaskan Penyelesaian Masalah'],
+  ['pmkOtak','Pembelajaran Berasaskan Otak (Brain-based Learning)']
+];
+const KI_ITEMS = [
+  ['kiKomunikasi','Kemahiran Komunikasi'],
+  ['kiKritis','Pemikiran Kritis dan Penyelesaian Masalah'],
+  ['kiSosial','Kemahiran Sosial - Kerja Berpasukan'],
+  ['kiSepanjangHayat','Pembelajaran Sepanjang Hayat dan Pengurusan Maklumat'],
+  ['kiKeusahawanan','Kemahiran Keusahawanan'],
+  ['kiEtika','Etika dan Moral Profesional'],
+  ['kiKepimpinan','Kemahiran Kepimpinan']
+];
+const AKTIVITI_FIELDS = ['langkah','masa','isiPelajaran','aktiviti','catatan','pautan'];
+
+let state = null;
+
+function emptyState(){
+  const s = {
+    id:'', minggu:'', tarikh:'', hari:'', tahun:'', masa:'', mataPelajaran:'Pendidikan Seni Visual',
+    bidang:'', tema:'', teknik:'', tajuk:'', stdKandungan:'', stdPembelajaran:'', objektif:'',
+    kriteria:'', bbm:'', bbb:'', kemahiran:'',
+    refleksi:'', tahap:'', kehadiran:'', bilMurid:'',
+    namaPelatih:'', namaPembimbing:'', namaBesar:'', namaPensyarah:'', status:'Draf',
+    aktiviti:[]
+  };
+  KBAT_ITEMS.forEach(([k])=> s[k]=false);
+  EMK_ITEMS.forEach(([k])=> s[k]='');
+  PMK_ITEMS.forEach(([k])=> s[k]='');
+  KI_ITEMS.forEach(([k])=> s[k]='');
+  return s;
+}
+
+function esc(v){
+  return String(v==null?'':v).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+/* ============================================================
+   API HELPERS — ikut corak sedia ada (text/plain elak CORS preflight)
+   ============================================================ */
+function apiGet(action, params){
+  let url = API_URL + '?action=' + encodeURIComponent(action);
+  if(params){ Object.keys(params).forEach(k=>{ url += '&'+k+'='+encodeURIComponent(params[k]); }); }
+  return fetch(url).then(r=>r.json());
+}
+function apiPost(action, data){
+  return fetch(API_URL, {
+    method:'POST',
+    headers:{'Content-Type':'text/plain;charset=utf-8'},
+    body: JSON.stringify({action, data})
+  }).then(r=>r.json());
+}
+
+function toast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(()=> t.classList.remove('show'), 2200);
+}
+
+function switchView(name){
+  ['list','form','cetak'].forEach(v=>{
+    document.getElementById('view-'+v).style.display = (v===name) ? 'block' : 'none';
+  });
+  window.scrollTo(0,0);
+}
+
+/* ============================================================
+   SENARAI RPH
+   ============================================================ */
+function loadList(){
+  const box = document.getElementById('list-container');
+  box.className = 'loading';
+  box.textContent = 'Memuatkan senarai RPH…';
+  apiGet('list').then(res=>{
+    if(res.error){ box.textContent = 'Ralat: ' + res.error; return; }
+    renderList(res);
+  }).catch(err=>{
+    box.innerHTML = '<div class="empty">Tidak dapat sambung ke pangkalan data.<br>'+
+      'Pastikan API_URL dalam fail ini telah ditetapkan ke URL Web App Apps Script.<br>'+
+      '<small>'+esc(err)+'</small></div>';
+  });
+}
+
+function badgeClass(status){
+  if(status==='Siap Cetak') return 'badge-cetak';
+  if(status==='Siap Semak') return 'badge-semak';
+  return 'badge-draf';
+}
+
+function renderList(items){
+  const box = document.getElementById('list-container');
+  if(!items.length){
+    box.innerHTML = '<div class="empty">Belum ada RPH lagi.<br>Klik <b>“+ RPH Baharu”</b> untuk mula.</div>';
+    return;
+  }
+  box.className = '';
+  box.innerHTML = items.map(it => `
+    <div class="rph-card">
+      <div class="info">
+        <b>${esc(it.tajuk || '(Tiada tajuk)')}</b>
+        <div class="meta">${esc(it.id)} · ${esc(it.tarikh||'-')} · ${esc(it.tahun||'-')} · ${esc(it.bidang||'-')}</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+        <span class="badge ${badgeClass(it.status)}">${esc(it.status||'Draf')}</span>
+        <button class="btn btn-outline btn-sm" onclick="openCetakFromList('${esc(it.id)}')">Cetak</button>
+        <button class="btn btn-navy btn-sm" onclick="openEdit('${esc(it.id)}')">Edit</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+/* ============================================================
+   BORANG — buka baharu / edit
+   ============================================================ */
+function openNew(){
+  state = emptyState();
+  switchView('form');
+  renderForm();
+}
+
+function openEdit(id){
+  switchView('form');
+  document.getElementById('view-form').innerHTML = '<div class="loading">Memuatkan RPH…</div>';
+  apiGet('get', {id}).then(res=>{
+    if(res.error || !res.data){ toast('Ralat memuat RPH.'); switchView('list'); return; }
+    state = normalizeLoaded_(res.data);
+    location.reload(); // pastikan struktur borang asal terbina semula, state disimpan di sessionStorage
+  });
+}
+
+// Kekalkan borang asal (kerana openEdit menulis ganti innerHTML) — guna pendekatan
+// simpan state di sessionStorage + reload supaya struktur HTML borang sentiasa utuh.
+function normalizeLoaded_(d){
+  const s = emptyState();
+  Object.keys(s).forEach(k=>{ if(d[k]!==undefined && k!=='aktiviti') s[k]=d[k]; });
+  s.id = d.id || '';
+  s.aktiviti = Array.isArray(d.aktiviti) ? d.aktiviti.map(a=>({
+    langkah:a.langkah||'', masa:a.masa||'', isiPelajaran:a.isiPelajaran||'',
+    aktiviti:a.aktiviti||'', catatan:a.catatan||'', pautan:a.pautan||''
+  })) : [];
+  sessionStorage.setItem('rphEditState', JSON.stringify(s));
+  sessionStorage.setItem('rphEditFlag', '1');
+  return s;
+}
+
+/* ============================================================
+   RENDER BORANG (dropdown + checklist + aktiviti)
+   ============================================================ */
+function fillSelect(id, list, includeBlank){
+  const el = document.getElementById(id);
+  el.innerHTML = (includeBlank ? '<option value="">-- Pilih --</option>' : '') +
+    list.map(v=>`<option value="${esc(v)}">${esc(v)}</option>`).join('');
+}
+
+function renderForm(){
+  fillSelect('f-hari', RUJUKAN.hari, true);
+  fillSelect('f-tahun', RUJUKAN.tahun, true);
+  fillSelect('f-mataPelajaran', RUJUKAN.mataPelajaran, false);
+  fillSelect('f-bidang', RUJUKAN.bidang, true);
+  fillSelect('f-status', RUJUKAN.status, false);
+
+  const simpleFields = ['minggu','tarikh','hari','tahun','masa','mataPelajaran','bidang','tema','teknik',
+    'tajuk','stdKandungan','stdPembelajaran','objektif','kriteria','bbm','bbb','kemahiran',
+    'refleksi','tahap','kehadiran','bilMurid','namaPelatih','namaPembimbing','namaBesar',
+    'namaPensyarah','status'];
+  simpleFields.forEach(f=>{
+    const el = document.getElementById('f-'+f);
+    if(el){ el.value = state[f] || ''; el.oninput = ()=>{ state[f] = el.value; }; }
+  });
+
+  renderKbat();
+  renderChecklist('emk-list', EMK_ITEMS);
+  renderChecklist('pmk-list', PMK_ITEMS);
+  renderChecklist('ki-list', KI_ITEMS);
+  renderAktiviti();
+}
+
+function renderKbat(){
+  const box = document.getElementById('kbat-grid');
+  box.innerHTML = KBAT_ITEMS.map(([key,label])=>`
+    <label class="kbat-item">
+      <input type="checkbox" id="kb-${key}" ${state[key] ? 'checked':''}>
+      <span>${esc(label)}</span>
+    </label>
+  `).join('');
+  KBAT_ITEMS.forEach(([key])=>{
+    document.getElementById('kb-'+key).onchange = e=>{ state[key] = e.target.checked; };
+  });
+}
+
+function renderChecklist(containerId, items){
+  const box = document.getElementById(containerId);
+  box.innerHTML = items.map(([key,label])=>`
+    <div class="chk-item">
+      <div class="chk-mark ${state[key] ? 'on':''}" id="mark-${key}">${state[key] ? '✓':''}</div>
+      <div class="chk-body">
+        <div class="chk-label">${esc(label)}</div>
+        <textarea id="txt-${key}" placeholder="Catatan (kosongkan jika tidak digunakan)" style="min-height:40px;">${esc(state[key])}</textarea>
+      </div>
+    </div>
+  `).join('');
+  items.forEach(([key])=>{
+    const ta = document.getElementById('txt-'+key);
+    ta.oninput = ()=>{
+      state[key] = ta.value;
+      const mark = document.getElementById('mark-'+key);
+      const used = ta.value.trim() !== '';
+      mark.className = 'chk-mark' + (used ? ' on' : '');
+      mark.textContent = used ? '✓' : '';
+    };
+  });
+}
+
+function renderAktiviti(){
+  const box = document.getElementById('aktiviti-list');
+  if(!state.aktiviti.length){
+    box.innerHTML = '<p class="hint">Belum ada langkah aktiviti. Klik butang di bawah untuk tambah.</p>';
+    return;
+  }
+  box.innerHTML = state.aktiviti.map((a,i)=>`
+    <div class="akt-item">
+      <span class="akt-num">Langkah ${i+1}</span>
+      <button class="akt-remove" onclick="removeAktiviti(${i})" title="Buang">✕</button>
+      <div class="grid2" style="margin-top:6px;">
+        <div class="field">
+          <label>Langkah</label>
+          <select id="akt-langkah-${i}">${RUJUKAN.langkah.map(l=>`<option value="${esc(l)}" ${a.langkah===l?'selected':''}>${esc(l)}</option>`).join('')}</select>
+        </div>
+        <div class="field"><label>Masa</label><input type="text" id="akt-masa-${i}" value="${esc(a.masa)}" placeholder="cth: 5 minit"></div>
+      </div>
+      <div class="field"><label>Isi Pelajaran</label><input type="text" id="akt-isiPelajaran-${i}" value="${esc(a.isiPelajaran)}"></div>
+      <div class="field"><label>Aktiviti Pembelajaran</label><textarea id="akt-aktiviti-${i}" placeholder="Satu baris = satu langkah aktiviti">${esc(a.aktiviti)}</textarea></div>
+      <div class="grid2">
+        <div class="field"><label>Catatan (Kaedah / EMK / Nilai / BBM)</label><textarea id="akt-catatan-${i}" style="min-height:50px;">${esc(a.catatan)}</textarea></div>
+        <div class="field"><label>Pautan (pilihan)</label><input type="text" id="akt-pautan-${i}" value="${esc(a.pautan)}" placeholder="https://..."></div>
+      </div>
+    </div>
+  `).join('');
+
+  state.aktiviti.forEach((a,i)=>{
+    AKTIVITI_FIELDS.forEach(f=>{
+      const el = document.getElementById(`akt-${f}-${i}`);
+      if(el){ el.oninput = ()=>{ state.aktiviti[i][f] = el.value; }; }
+    });
+  });
+}
+
+function addAktiviti(){
+  state.aktiviti.push({langkah:RUJUKAN.langkah[Math.min(state.aktiviti.length,RUJUKAN.langkah.length-1)],
+    masa:'', isiPelajaran:'', aktiviti:'', catatan:'', pautan:''});
+  renderAktiviti();
+}
+function removeAktiviti(i){
+  state.aktiviti.splice(i,1);
+  renderAktiviti();
+}
+
+/* ============================================================
+   SIMPAN
+   ============================================================ */
+function saveForm(){
+  if(!state.tajuk || !state.tarikh){
+    toast('Sila isi Tajuk dan Tarikh sebelum simpan.');
+    return;
+  }
+  toast('Menyimpan…');
+  apiPost('save', state).then(res=>{
+    if(res.error){ toast('Ralat: '+res.error); return; }
+    state.id = res.id;
+    toast('RPH disimpan (' + res.id + ')');
+    sessionStorage.removeItem('rphEditState');
+    sessionStorage.removeItem('rphEditFlag');
+    setTimeout(()=>{ switchView('list'); loadList(); }, 400);
+  }).catch(err=> toast('Ralat sambungan: '+err));
+}
+
+/* ============================================================
+   CETAK — pratonton borang penuh (dari borang semasa / dari senarai)
+   ============================================================ */
+function previewCetak(){
+  renderCetak(state);
+  switchView('cetak');
+}
+function openCetakFromList(id){
+  switchView('cetak');
+  document.getElementById('cetak-doc').innerHTML = '<div class="loading">Memuatkan…</div>';
+  apiGet('get', {id}).then(res=>{
+    if(res.error || !res.data){ toast('Ralat memuat RPH.'); switchView('list'); return; }
+    const d = emptyState();
+    Object.keys(d).forEach(k=>{ if(res.data[k]!==undefined && k!=='aktiviti') d[k]=res.data[k]; });
+    d.id = res.data.id;
+    d.aktiviti = res.data.aktiviti || [];
+    renderCetak(d);
+  });
+}
+
+function markLine(val, label){
+  const used = val && String(val).trim() !== '';
+  return `<b>${used?'☑':'☐'} ${esc(label)}</b>`;
+}
+function catatanOrDash(val){
+  const v = val && String(val).trim() !== '' ? val : '\u2013';
+  return esc(v);
+}
+
+function renderCetak(d){
+  const emkRows = [];
+  for(let i=0;i<EMK_ITEMS.length;i+=2){
+    const [k1,l1] = EMK_ITEMS[i];
+    const pair2 = EMK_ITEMS[i+1];
+    emkRows.push(`
+      <div class="c-gitem">
+        <div style="flex:0 0 26%;">${markLine(d[k1], l1)}</div>
+        <div>${catatanOrDash(d[k1])}</div>
+        ${pair2 ? `<div style="flex:0 0 26%;">${markLine(d[pair2[0]], pair2[1])}</div><div>${catatanOrDash(d[pair2[0]])}</div>` : '<div style="flex:0 0 26%;"></div><div></div>'}
+      </div>`);
+  }
+  const pmkRows = PMK_ITEMS.map(([k,l])=>`
+    <div class="c-item1"><div class="c-label">${markLine(d[k],l)}</div><div class="c-val">${catatanOrDash(d[k])}</div></div>`).join('');
+  const kiRows = KI_ITEMS.map(([k,l])=>`
+    <div class="c-item1"><div class="c-label">${markLine(d[k],l)}</div><div class="c-val">${catatanOrDash(d[k])}</div></div>`).join('');
+  const kbatRows = [];
+  for(let i=0;i<KBAT_ITEMS.length;i+=2){
+    const [k1,l1]=KBAT_ITEMS[i]; const [k2,l2]=KBAT_ITEMS[i+1];
+    kbatRows.push(`<div class="c-gitem"><div>${markLine(d[k1],l1)}</div><div>${markLine(d[k2],l2)}</div></div>`);
+  }
+
+  const aktRows = (d.aktiviti||[]).map(a=>`
+    <tr>
+      <td>${esc(a.langkah)}${a.masa? '\n('+esc(a.masa)+')':''}</td>
+      <td>${esc(a.isiPelajaran)}${a.pautan? '\n\nPautan: '+esc(a.pautan):''}</td>
+      <td>${esc(a.aktiviti)}</td>
+      <td>${esc(a.catatan)}</td>
+    </tr>`).join('');
+
+  const tarikhStr = d.tarikh ? new Date(d.tarikh).toLocaleDateString('ms-MY',{day:'2-digit',month:'2-digit',year:'numeric'}) : '';
+
+  document.getElementById('cetak-doc').innerHTML = `
+    <h2>RANCANGAN PENGAJARAN HARIAN<br>PENDIDIKAN SENI VISUAL</h2>
+
+    <div class="c-pair">
+      <div><div class="c-label" style="flex:0 0 70px;">Minggu</div><div class="c-val">${esc(d.minggu)}</div></div>
+      <div><div class="c-label" style="flex:0 0 110px;">Tarikh &amp; Hari</div><div class="c-val">${esc(tarikhStr)} (${esc(d.hari)})</div></div>
+    </div>
+    <div class="c-pair">
+      <div><div class="c-label" style="flex:0 0 70px;">Tahun</div><div class="c-val">${esc(d.tahun)}</div></div>
+      <div><div class="c-label" style="flex:0 0 110px;">Masa</div><div class="c-val">${esc(d.masa)}</div></div>
+    </div>
+    <div class="c-row"><div class="c-label">Mata Pelajaran</div><div class="c-val">${esc(d.mataPelajaran)}</div></div>
+    <div class="c-pair">
+      <div><div class="c-label" style="flex:0 0 70px;">Bidang</div><div class="c-val">${esc(d.bidang)}</div></div>
+      <div><div class="c-label" style="flex:0 0 70px;">Tema</div><div class="c-val">${esc(d.tema)}</div></div>
+    </div>
+    <div class="c-pair">
+      <div><div class="c-label" style="flex:0 0 70px;">Teknik</div><div class="c-val">${esc(d.teknik)}</div></div>
+      <div><div class="c-label" style="flex:0 0 70px;">Tajuk</div><div class="c-val">${esc(d.tajuk)}</div></div>
+    </div>
+    <div class="c-row"><div class="c-label">Standard Kandungan</div><div class="c-val">${esc(d.stdKandungan)}</div></div>
+    <div class="c-row"><div class="c-label">Standard Pembelajaran</div><div class="c-val">${esc(d.stdPembelajaran)}</div></div>
+    <div class="c-row"><div class="c-label">Objektif Pembelajaran</div><div class="c-val">${esc(d.objektif)}</div></div>
+    <div class="c-row"><div class="c-label">Kriteria Kejayaan</div><div class="c-val">${esc(d.kriteria)}</div></div>
+    <div class="c-row"><div class="c-label">BBM</div><div class="c-val">${esc(d.bbm)}</div></div>
+    <div class="c-row"><div class="c-label">BBB</div><div class="c-val">${esc(d.bbb)}</div></div>
+    <div class="c-row"><div class="c-label">Kemahiran Sedia Ada</div><div class="c-val">${esc(d.kemahiran)}</div></div>
+
+    <div class="c-section">KEMAHIRAN BERFIKIR ARAS TINGGI (KBAT)</div>
+    <div class="c-grid2">${kbatRows.join('')}</div>
+
+    <div class="c-section">ELEMEN MERENTAS KURIKULUM (EMK)</div>
+    <div class="c-grid2">${emkRows.join('')}</div>
+
+    <div class="c-section">AMALAN PEDAGOGI MASA KINI (PMK)</div>
+    ${pmkRows}
+
+    <div class="c-section">KEMAHIRAN INSANIAH (KI)</div>
+    ${kiRows}
+
+    <div class="c-section">AKTIVITI PdPC</div>
+    <table class="c-akt">
+      <tr><th style="width:14%;">Langkah / Masa</th><th style="width:22%;">Isi Pelajaran</th>
+        <th style="width:36%;">Aktiviti Pembelajaran</th><th style="width:28%;">Catatan</th></tr>
+      ${aktRows || '<tr><td colspan="4" style="text-align:center;color:#888;">(Tiada aktiviti didaftarkan)</td></tr>'}
+    </table>
+
+    <div class="c-row" style="margin-top:14px;"><div class="c-label">Refleksi</div><div class="c-val">${esc(d.refleksi)}</div></div>
+    <div class="c-row"><div class="c-label">Tahap Penguasaan (PBD)</div><div class="c-val">${esc(d.tahap)}</div></div>
+    <div class="c-row"><div class="c-label">Kehadiran</div><div class="c-val">${esc(d.kehadiran)}</div></div>
+    <div class="c-row"><div class="c-label">Bil. Murid Hantar Tugasan</div><div class="c-val">${esc(d.bilMurid)}</div></div>
+
+    <div class="c-sig">
+      <div>Tandatangan Guru Pelatih:\n\n\n_____________________\n(${esc(d.namaPelatih)})\nGuru Pelatih, IPG Kampus Sarawak\nTarikh: ${esc(tarikhStr)}</div>
+      <div>Tandatangan Guru Pembimbing:\n\n\n_____________________\n(${esc(d.namaPembimbing)})\nGuru Pembimbing</div>
+    </div>
+    <div class="c-sig">
+      <div>Disahkan oleh:\n\n\n_____________________\n(${esc(d.namaBesar)})\nGuru Besar</div>
+      <div>Disemak oleh:\n\n\n_____________________\n(${esc(d.namaPensyarah)})\nPensyarah Penyelia, IPGM</div>
+    </div>
+  `;
+}
+
+/* ============================================================
+   PERMULAAN
+   ============================================================ */
+window.onload = function(){
+  if(sessionStorage.getItem('rphEditFlag') === '1'){
+    const saved = sessionStorage.getItem('rphEditState');
+    sessionStorage.removeItem('rphEditFlag');
+    if(saved){
+      state = JSON.parse(saved);
+      switchView('form');
+      renderForm();
+      return;
+    }
+  }
+  switchView('list');
+  loadList();
+};
+</script>
+
+</body>
+</html>
