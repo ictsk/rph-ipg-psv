@@ -3,13 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>eRPH Automator — SK Krangan</title>
+<title>AAL ERPH — Pendidikan Seni Visual</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --navy:#081F5C; --navy-dark:#051333; --gold:#C08A3E; --crimson:#A23B3B; --field-blue:#4EADEA;
-    --bg:#F5F6F8; --card:#FFFFFF; --border:#E1E4EA; --text:#1F2430; --muted:#6B7280;
+    --navy:#B71C1C; --navy-dark:#7A0000; --gold:#3A3A3A; --crimson:#D32F2F; --field-blue:#D9D9D9;
+    --rph-blue:#4EADEA; --rph-navy:#081F5C;
+    --bg:#F2F2F2; --card:#FFFFFF; --border:#CCCCCC; --text:#1A1A1A; --muted:#6B6B6B;
     --ok:#2F855A; --radius:12px;
   }
   *{box-sizing:border-box;}
@@ -24,7 +25,7 @@
     transition:transform .08s ease, box-shadow .15s ease;}
   .btn:active{transform:scale(.97);}
   .btn-gold{background:var(--gold);color:#fff;}
-  .btn-gold:hover{box-shadow:0 4px 12px rgba(192,138,62,.4);}
+  .btn-gold:hover{box-shadow:0 4px 12px rgba(58,58,58,.35);}
   .btn-outline{background:#fff;color:var(--navy);border:1.5px solid var(--border);}
   .btn-outline:hover{border-color:var(--navy);}
   .btn-crimson{background:var(--crimson);color:#fff;}
@@ -33,7 +34,7 @@
   main{max-width:980px;margin:0 auto;padding:22px 16px 80px;}
   .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
     margin-bottom:16px;overflow:hidden;}
-  .card-head{background:var(--field-blue);color:#0B2545;padding:12px 18px;font-family:'Fraunces',serif;
+  .card-head{background:var(--field-blue);color:#1A1A1A;padding:12px 18px;font-family:'Fraunces',serif;
     font-size:15.5px;font-weight:600;display:flex;align-items:center;justify-content:space-between;}
   .card-body{padding:18px;}
   .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
@@ -75,7 +76,7 @@
     font-size:11px;font-weight:700;padding:2px 9px;border-radius:20px;}
   .akt-remove{position:absolute;top:10px;right:10px;background:none;border:none;color:var(--crimson);
     font-size:18px;cursor:pointer;line-height:1;}
-  .add-row{width:100%;padding:12px;border:1.5px dashed var(--gold);border-radius:10px;background:#FFF9F0;
+  .add-row{width:100%;padding:12px;border:1.5px dashed var(--gold);border-radius:10px;background:#F0F0F0;
     color:var(--gold);font-weight:700;cursor:pointer;font-size:13.5px;}
   .toolbar{display:flex;gap:10px;justify-content:flex-end;margin-top:6px;flex-wrap:wrap;}
   .toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:var(--navy-dark);
@@ -83,11 +84,11 @@
     transition:opacity .25s;pointer-events:none;}
   .toast.show{opacity:1;}
   .loading{text-align:center;padding:40px;color:var(--muted);}
-  #view-form, #view-cetak{display:none;}
+  #view-form, #view-cetak, #view-rpt{display:none;}
   /* --- Cetak (print) view --- */
   #cetak-doc{background:#fff;border:1px solid var(--border);border-radius:10px;padding:26px;
     font-family:Arial, Helvetica, sans-serif;font-size:12px;line-height:1.5;}
-  #cetak-doc h2{text-align:center;font-size:17px;margin:0 0 0;padding:14px;background:var(--navy);color:#fff;
+  #cetak-doc h2{text-align:center;font-size:17px;margin:0 0 0;padding:14px;background:var(--rph-navy);color:#fff;
     font-weight:700;border-radius:4px 4px 0 0;}
   .c-empty-box{border:1px solid #000;border-top:none;min-height:60px;padding:8px 10px;}
   .c-empty-box .lbl{font-weight:700;font-size:12px;margin-bottom:4px;display:block;}
@@ -96,16 +97,24 @@
   table.kpm-table tr:first-child td{border-top:none;}
   table.kpm-table td{border:1px solid #000;padding:6px 9px;font-size:12px;vertical-align:middle;
     white-space:pre-wrap;}
-  table.kpm-table td.label-cell{background:var(--field-blue);color:#0B2545;font-weight:700;
+  table.kpm-table td.label-cell{background:var(--rph-blue);color:#0B2545;font-weight:700;
     text-align:center;vertical-align:middle;text-transform:uppercase;}
-  table.kpm-table td.head-cell{background:var(--field-blue);color:#0B2545;font-weight:700;text-align:center;text-transform:uppercase;}
+  table.kpm-table td.head-cell{background:var(--rph-blue);color:#0B2545;font-weight:700;text-align:center;text-transform:uppercase;}
   table.kpm-table td.no-caps{text-transform:none;}
-  .c-section{background:var(--field-blue);color:#0B2545;text-align:center;font-weight:700;padding:6px;
+  .rpt-year-title{font-weight:700;color:var(--navy);font-size:16px;margin:22px 0 4px;}
+  .rpt-year-sub{font-size:12.5px;color:#666;margin:0 0 10px;}
+  table.rpt-table{width:100%;border-collapse:collapse;margin-bottom:8px;table-layout:fixed;}
+  table.rpt-table th{background:var(--navy);color:#fff;font-size:12px;padding:8px 9px;text-align:left;border:1px solid #000000;}
+  table.rpt-table td{border:1px solid #ccc;padding:8px 9px;font-size:12.5px;vertical-align:top;}
+  table.rpt-table tr:nth-child(even) td{background:#F7F9FC;}
+  table.rpt-table .rpt-minggu{text-align:center;font-weight:700;color:var(--navy);}
+  table.rpt-table .rpt-unit{font-weight:700;}
+  .c-section{background:var(--rph-blue);color:#0B2545;text-align:center;font-weight:700;padding:6px;
     margin-top:0;font-size:12px;border:1px solid #000;border-top:none;}
   .c-sig{display:flex;gap:16px;margin-top:20px;}
   .c-sig div{flex:1;font-size:12px;white-space:pre-wrap;}
   @media print{
-    header,.toolbar,#view-list,.no-print{display:none !important;}
+    header,.toolbar,#view-list,#view-rpt,.no-print{display:none !important;}
     body{background:#fff;}
     main{padding:0;max-width:100%;}
     #cetak-doc{border:none;padding:0;}
@@ -119,9 +128,10 @@
 
 <header>
   <div>
-    <h1>eRPH Automator</h1>
-    <div class="sub">SK Krangan · Pendidikan Seni Visual</div>
+    <h1>AAL ERPH</h1>
+    <div class="sub">Pendidikan Seni Visual</div>
   </div>
+  <button class="btn btn-outline no-print" onclick="switchView('rpt')">📅 RPT Rujukan</button>
   <button class="btn btn-gold no-print" onclick="openNew()">+ RPH Baharu</button>
 </header>
 
@@ -130,6 +140,25 @@
   <!-- ===================== VIEW: SENARAI ===================== -->
   <section id="view-list">
     <div id="list-container" class="loading">Memuatkan senarai RPH…</div>
+  </section>
+
+  <!-- ===================== VIEW: RPT RUJUKAN ===================== -->
+  <section id="view-rpt">
+    <div class="toolbar no-print" style="margin-bottom:14px;">
+      <button class="btn btn-outline" onclick="switchView('list')">← Kembali</button>
+    </div>
+    <div class="card">
+      <div class="card-head">Rancangan Pengajaran Tahunan (Praktikum) — Rujukan</div>
+      <div class="card-body">
+        <p style="font-size:13px;color:#555;margin:0 0 14px;">
+          Tempoh Praktikum: <strong>17 Ogos – 30 Oktober 2026 (10 Minggu Praktikum)</strong>. <strong style="color:#B71C1C;">Pacing: 1 unit = 2 minggu (Sesi 1 &amp; Sesi 2)</strong>, setiap sesi diakhiri dengan segmen <strong>Apresiasi Seni</strong> — jadi dalam 10 minggu, <strong>5 unit</strong> (bukan 10) sempat diajar setiap tahun.
+          Lajur <strong>Minggu Sekolah</strong> ikut nombor rasmi Minggu Persekolahan takwim Sarawak 2026 — <strong>minggu cuti tidak dikira/dilangkau</strong> dalam penomboran ini, ikut format takwim rasmi sekolah.
+          Baris <strong style="color:#D32F2F;">⚑ bertanda</strong> menunjukkan tarikh <strong>cuti</strong> (cuti sekolah atau cuti umum) — tiada pengajaran, dan minggu tersebut dilangkau daripada penomboran Minggu Sekolah.
+          Tahun 2 &amp; Tahun 5 masing-masing kehilangan satu slot tambahan akibat cuti umum (Hari Malaysia / Maulidur Rasul) yang bertembung dengan hari kelas, jadi Sesi 2 Unit 5 disambung ke minggu pertama selepas 30 Okt (ditanda <em>*luar tempoh</em>).
+        </p>
+        <div id="rpt-container"></div>
+      </div>
+    </div>
   </section>
 
   <!-- ===================== VIEW: BORANG ===================== -->
@@ -175,19 +204,26 @@
         <div class="field" id="dskp-sk-wrap" style="display:none;">
           <label>Pilih Standard Kandungan (SK) — daripada DSKP</label>
           <select id="dskp-sk-select"></select>
-          <div class="hint">Pilih sekali lagi untuk tambah SK lain — setiap pilihan ditambah sebagai baris baharu.
-            <a href="#" onclick="document.getElementById('f-stdKandungan').value='';state.stdKandungan='';return false;" style="color:var(--crimson);">Kosongkan</a></div>
+          <div class="hint">Pilihan pertama isi "Utama", pilihan kedua isi "Sub". Pilih sekali lagi untuk gantikan.
+            <a href="#" onclick="document.getElementById('f-stdKandunganUtama').value='';document.getElementById('f-stdKandunganSub').value='';state.stdKandunganUtama='';state.stdKandunganSub='';return false;" style="color:var(--crimson);">Kosongkan</a></div>
         </div>
-        <div class="field"><label>Standard Kandungan</label><textarea id="f-stdKandungan"></textarea>
-          <div class="hint">Ikut DSKP rasmi mengikut Bidang & Tahun. Boleh pilih dropdown di atas atau taip terus.</div></div>
+        <div class="field-row" style="display:flex;gap:12px;">
+          <div class="field" style="flex:1;"><label>Standard Kandungan — Utama</label><textarea id="f-stdKandunganUtama"></textarea></div>
+          <div class="field" style="flex:1;"><label>Standard Kandungan — Sub</label><textarea id="f-stdKandunganSub"></textarea></div>
+        </div>
+        <div class="hint" style="margin:-6px 0 12px;">Ikut DSKP rasmi mengikut Bidang & Tahun. Boleh pilih dropdown di atas atau taip terus. Kedua-dua lajur akan dipaparkan bersebelahan dalam cetakan (ikut format borang rasmi).</div>
 
         <div class="field" id="dskp-sp-wrap" style="display:none;">
           <label>Pilih Standard Pembelajaran (SP) — daripada DSKP</label>
           <select id="dskp-sp-select"></select>
-          <div class="hint">Senarai SP tidak diikat kepada SK di atas — pilih bebas. Pilih sekali lagi untuk tambah SP lain.
-            <a href="#" onclick="document.getElementById('f-stdPembelajaran').value='';state.stdPembelajaran='';return false;" style="color:var(--crimson);">Kosongkan</a></div>
+          <div class="hint">Senarai SP tidak diikat kepada SK di atas — pilih bebas. Pilihan pertama isi "Utama", pilihan kedua isi "Sub".
+            <a href="#" onclick="document.getElementById('f-stdPembelajaranUtama').value='';document.getElementById('f-stdPembelajaranSub').value='';state.stdPembelajaranUtama='';state.stdPembelajaranSub='';return false;" style="color:var(--crimson);">Kosongkan</a></div>
         </div>
-        <div class="field"><label>Standard Pembelajaran</label><textarea id="f-stdPembelajaran"></textarea></div>
+        <div class="field-row" style="display:flex;gap:12px;">
+          <div class="field" style="flex:1;"><label>Standard Pembelajaran — Utama</label><textarea id="f-stdPembelajaranUtama"></textarea></div>
+          <div class="field" style="flex:1;"><label>Standard Pembelajaran — Sub</label><textarea id="f-stdPembelajaranSub"></textarea></div>
+        </div>
+
 
         <div class="field"><label>Objektif Pembelajaran</label><textarea id="f-objektif" placeholder="Satu baris = satu objektif"></textarea></div>
         <div class="field"><label>Kriteria Kejayaan</label><textarea id="f-kriteria"></textarea></div>
@@ -391,7 +427,7 @@ let state = null;
 function emptyState(){
   const s = {
     id:'', minggu:'', tarikh:'', hari:'', tahun:'', masa:'', mataPelajaran:'Pendidikan Seni Visual',
-    bidang:'', tema:'', teknik:'', tajuk:'', stdKandungan:'', stdPembelajaran:'', objektif:'',
+    bidang:'', tema:'', teknik:'', tajuk:'', stdKandunganUtama:'', stdKandunganSub:'', stdPembelajaranUtama:'', stdPembelajaranSub:'', objektif:'',
     kriteria:'', bbm:'', bbb:'', kemahiran:'',
     refleksi:'', tahap:'', kehadiran:'', bilMurid:'',
     namaPelatih:'', namaPembimbing:'', namaBesar:'', namaPensyarah:'', status:'Draf',
@@ -432,10 +468,252 @@ function toast(msg){
 }
 
 function switchView(name){
-  ['list','form','cetak'].forEach(v=>{
+  ['list','form','cetak','rpt'].forEach(v=>{
     document.getElementById('view-'+v).style.display = (v===name) ? 'block' : 'none';
   });
+  if(name==='rpt' && !document.getElementById('rpt-container').dataset.loaded){
+    renderRptRujukan();
+    document.getElementById('rpt-container').dataset.loaded = '1';
+  }
   window.scrollTo(0,0);
+}
+
+/* ============================================================
+   RPT PRAKTIKUM — DATA RUJUKAN (Tahun 1, 2, 5)
+   Sumber: DSKP KSSR PSV Semakan 2017 + RPT rujukan sedia ada.
+   Cuti disemak: Cuti Penggal 2 Sarawak (29 Ogos - 6 Sept 2026),
+   Maulidur Rasul (25 Ogos 2026, Selasa), Hari Malaysia (16 Sept 2026, Rabu).
+   NOTA PACING: 1 unit = 2 minggu (Sesi 1 & Sesi 2). Setiap sesi diakhiri
+   dengan segmen Apresiasi Seni. Dalam 10 minggu praktikum, 5 unit (bukan 10)
+   sempat diajar setiap tahun.
+   ============================================================ */
+const APRESIASI_S1 = "Apresiasi Seni (±10 min): Murid memerhati & membincang contoh/rujukan karya berkaitan tajuk — bahasa seni visual, idea dan fungsi karya.";
+const APRESIASI_S2 = "Apresiasi Seni (±10 min): Murid membentang & membincang hasil karya sendiri/rakan sebaya — idea, teknik, olahan dan penambahbaikan.";
+
+// SK/SP setiap unit: sk1/sp1 = komponen Utama (1.x Bahasa Seni Visual/Persepsi),
+// sk2/sp2 = komponen Sub (2.x Kemahiran/Aplikasi). Kedua-dua dipaparkan bersebelahan
+// (ikut format borang eRPH asal) untuk SETIAP sesi (Sesi 1 & Sesi 2 unit yang sama).
+const RPT_DATA = [
+  { tahun:"Tahun 1", hari:"Jumaat", masa:"8.30 - 9.30 pagi",
+    cuti:[ {afterSesi:2, tarikh:"29 Ogos – 6 September 2026", label:"CUTI PENGGAL 2 SARAWAK", tipe:"Cuti Sekolah"} ],
+    sesi:[
+      { tarikh:"21 Ogos 2026", mp:29, unit:"Unit 1", tajuk:"Seni Bermula di Sini", teknik:"Capan", bidang:"Menggambar", sesi:1,
+        sk1:"1.1 Bahasa Seni Visual", sk2:"2.1 Kemahiran Seni Visual",
+        sp1:"1.1.1 Mengenal, memahami dan menamakan bahasa seni visual pada karya menggambar: Capan.",
+        sp2:"2.1.1 Mengaplikasikan pengetahuan bahasa seni visual, media, teknik dan proses: Capan.",
+        catatan:"EMK: Menghargai alam sekitar · KBAT: Mengaplikasi", apresiasi:APRESIASI_S1 },
+      { tarikh:"28 Ogos 2026", mp:30, unit:"Unit 1", tajuk:"Seni Bermula di Sini", teknik:"Capan", bidang:"Menggambar", sesi:2,
+        sk1:"1.1 Bahasa Seni Visual", sk2:"2.1 Kemahiran Seni Visual",
+        sp1:"1.1.1 Mengenal, memahami dan menamakan bahasa seni visual pada karya menggambar: Capan.",
+        sp2:"2.1.1 Mengaplikasikan pengetahuan bahasa seni visual, media, teknik dan proses: Capan.",
+        catatan:"EMK: Menghargai alam sekitar · KBAT: Mengaplikasi", apresiasi:APRESIASI_S2 },
+      { tarikh:"11 September 2026", mp:31, unit:"Unit 2", tajuk:"Jari Menari, Warna Berseri", teknik:"Ikatan dan Celupan", bidang:"Membuat Corak dan Rekaan", sesi:1,
+        sk1:"1.1 Bahasa Seni Visual", sk2:"2.1 Kemahiran Seni Visual",
+        sp1:"1.1.2 Mengenal, memahami dan menamakan bahasa seni visual pada karya mencorak: Ikatan dan celupan.",
+        sp2:"2.1.2 Mengaplikasikan pengetahuan bahasa seni visual, media, teknik dan proses: Ikatan dan celupan.",
+        catatan:"EMK: Keusahawanan · KBAT: Mengaplikasi", apresiasi:APRESIASI_S1 },
+      { tarikh:"18 September 2026", mp:32, unit:"Unit 2", tajuk:"Jari Menari, Warna Berseri", teknik:"Ikatan dan Celupan", bidang:"Membuat Corak dan Rekaan", sesi:2,
+        sk1:"1.1 Bahasa Seni Visual", sk2:"2.1 Kemahiran Seni Visual",
+        sp1:"1.1.2 Mengenal, memahami dan menamakan bahasa seni visual pada karya mencorak: Ikatan dan celupan.",
+        sp2:"2.1.2 Mengaplikasikan pengetahuan bahasa seni visual, media, teknik dan proses: Ikatan dan celupan.",
+        catatan:"EMK: Keusahawanan · KBAT: Mengaplikasi", apresiasi:APRESIASI_S2 },
+      { tarikh:"25 September 2026", mp:33, unit:"Unit 3", tajuk:"La La La Bonekaku Bernyanyi", teknik:"Boneka", bidang:"Membentuk dan Membuat Binaan", sesi:1,
+        sk1:"1.1 Bahasa Seni Visual", sk2:"2.1 Kemahiran Seni Visual",
+        sp1:"1.1.3 Mengenal, memahami dan menamakan bahasa seni visual pada karya membentuk/membuat binaan: Boneka.",
+        sp2:"2.1.3 Mengaplikasikan pengetahuan bahasa seni visual, media, teknik dan proses: Boneka.",
+        catatan:"EMK: Kreativiti dan Inovasi · KBAT: Mengaplikasi", apresiasi:APRESIASI_S1 },
+      { tarikh:"2 Oktober 2026", mp:34, unit:"Unit 3", tajuk:"La La La Bonekaku Bernyanyi", teknik:"Boneka", bidang:"Membentuk dan Membuat Binaan", sesi:2,
+        sk1:"1.1 Bahasa Seni Visual", sk2:"2.1 Kemahiran Seni Visual",
+        sp1:"1.1.3 Mengenal, memahami dan menamakan bahasa seni visual pada karya membentuk/membuat binaan: Boneka.",
+        sp2:"2.1.3 Mengaplikasikan pengetahuan bahasa seni visual, media, teknik dan proses: Boneka.",
+        catatan:"EMK: Kreativiti dan Inovasi · KBAT: Mengaplikasi", apresiasi:APRESIASI_S2 },
+      { tarikh:"9 Oktober 2026", mp:35, unit:"Unit 4", tajuk:"Cantik Batik", teknik:"Batik", bidang:"Mengenal Kraf Tradisional", sesi:1,
+        sk1:"1.1 Bahasa Seni Visual", sk2:"2.1 Kemahiran Seni Visual",
+        sp1:"1.1.4 Mengenal, memahami dan menamakan bahasa seni visual pada karya kraf tradisional: Batik.",
+        sp2:"2.1.4 Mengaplikasikan pengetahuan bahasa seni visual, media, teknik dan proses: Batik.",
+        catatan:"EMK: Patriotisme · KBAT: Menganalisis", apresiasi:APRESIASI_S1 },
+      { tarikh:"16 Oktober 2026", mp:36, unit:"Unit 4", tajuk:"Cantik Batik", teknik:"Batik", bidang:"Mengenal Kraf Tradisional", sesi:2,
+        sk1:"1.1 Bahasa Seni Visual", sk2:"2.1 Kemahiran Seni Visual",
+        sp1:"1.1.4 Mengenal, memahami dan menamakan bahasa seni visual pada karya kraf tradisional: Batik.",
+        sp2:"2.1.4 Mengaplikasikan pengetahuan bahasa seni visual, media, teknik dan proses: Batik.",
+        catatan:"EMK: Patriotisme · KBAT: Menganalisis", apresiasi:APRESIASI_S2 },
+      { tarikh:"23 Oktober 2026", mp:37, unit:"Unit 5", tajuk:"Tik Tok Tik, Lukis di Udara", teknik:"Lukisan", bidang:"Menggambar", sesi:1,
+        sk1:"1.1 Bahasa Seni Visual", sk2:"2.1 Kemahiran Seni Visual",
+        sp1:"1.1.1(ii) Mengenal, memahami dan menamakan bahasa seni visual pada karya menggambar: Lukisan.",
+        sp2:"2.1.1(ii) Mengaplikasikan pengetahuan bahasa seni visual, media, teknik dan proses: Lukisan.",
+        catatan:"EMK: Kreativiti dan Inovasi · KBAT: Menganalisis", apresiasi:APRESIASI_S1 },
+      { tarikh:"30 Oktober 2026", mp:38, unit:"Unit 5", tajuk:"Tik Tok Tik, Lukis di Udara", teknik:"Lukisan", bidang:"Menggambar", sesi:2,
+        sk1:"1.1 Bahasa Seni Visual", sk2:"2.1 Kemahiran Seni Visual",
+        sp1:"1.1.1(ii) Mengenal, memahami dan menamakan bahasa seni visual pada karya menggambar: Lukisan.",
+        sp2:"2.1.1(ii) Mengaplikasikan pengetahuan bahasa seni visual, media, teknik dan proses: Lukisan.",
+        catatan:"EMK: Kreativiti dan Inovasi · KBAT: Menganalisis", apresiasi:APRESIASI_S2 },
+    ]
+  },
+  { tahun:"Tahun 2", hari:"Rabu", masa:"10.30 - 11.30 pagi",
+    luarTempohFrom:10,
+    cuti:[
+      {afterSesi:2, tarikh:"29 Ogos – 6 September 2026", label:"CUTI PENGGAL 2 SARAWAK", tipe:"Cuti Sekolah"},
+      {afterSesi:3, tarikh:"16 September 2026 (Rabu)", label:"HARI MALAYSIA", tipe:"Cuti Umum"},
+    ],
+    sesi:[
+      { tarikh:"19 Ogos 2026", mp:29, unit:"Unit 1", tajuk:"Kami Suka Sayur", teknik:"Garisan Selari (Lukisan)", bidang:"Menggambar", sesi:1,
+        sk1:"1.1 Bahasa Seni Visual", sk2:"2.1 Kemahiran Seni Visual",
+        sp1:"1.1.1(i) Mengenal dan menerangkan bahasa seni visual pada lukisan (garisan, rupa, imbangan, kepelbagaian).",
+        sp2:"2.1.1(i) Mengaplikasikan bahasa seni visual, media dan proses menggunakan teknik garisan selari.",
+        catatan:"Ilmu: Kreativiti dan Inovasi · KBAT: Menganalisis", apresiasi:APRESIASI_S1 },
+      { tarikh:"26 Ogos 2026", mp:30, unit:"Unit 1", tajuk:"Kami Suka Sayur", teknik:"Garisan Selari (Lukisan)", bidang:"Menggambar", sesi:2,
+        sk1:"1.1 Bahasa Seni Visual", sk2:"2.1 Kemahiran Seni Visual",
+        sp1:"1.1.1(i) Mengenal dan menerangkan bahasa seni visual pada lukisan (garisan, rupa, imbangan, kepelbagaian).",
+        sp2:"2.1.1(i) Mengaplikasikan bahasa seni visual, media dan proses menggunakan teknik garisan selari.",
+        catatan:"Ilmu: Kreativiti dan Inovasi · KBAT: Menganalisis", apresiasi:APRESIASI_S2 },
+      { tarikh:"9 September 2026", mp:31, unit:"Unit 2", tajuk:"Bersih Pasti Cantik", teknik:"Lipatan dan Guntingan", bidang:"Membuat Corak dan Rekaan", sesi:1,
+        sk1:"1.1 Bahasa Seni Visual", sk2:"2.1 Kemahiran Seni Visual",
+        sp1:"1.1.2(i) Mengenal dan menerangkan bahasa seni visual pada lipatan dan guntingan.",
+        sp2:"2.1.2(i) Mengaplikasikan bahasa seni visual, media dan proses menggunakan teknik lipatan dan guntingan.",
+        catatan:"Ilmu: Kreativiti dan Inovasi · KBAT: Menganalisis, Mengaplikasi", apresiasi:APRESIASI_S1 },
+      { tarikh:"23 September 2026", mp:33, unit:"Unit 2", tajuk:"Bersih Pasti Cantik", teknik:"Lipatan dan Guntingan", bidang:"Membuat Corak dan Rekaan", sesi:2,
+        sk1:"1.1 Bahasa Seni Visual", sk2:"2.1 Kemahiran Seni Visual",
+        sp1:"1.1.2(i) Mengenal dan menerangkan bahasa seni visual pada lipatan dan guntingan.",
+        sp2:"2.1.2(i) Mengaplikasikan bahasa seni visual, media dan proses menggunakan teknik lipatan dan guntingan.",
+        catatan:"Ilmu: Kreativiti dan Inovasi · KBAT: Menganalisis, Mengaplikasi", apresiasi:APRESIASI_S2 },
+      { tarikh:"30 September 2026", mp:34, unit:"Unit 3", tajuk:"Saya Juara", teknik:"Stabail", bidang:"Membentuk dan Membuat Binaan", sesi:1,
+        sk1:"1.1 Bahasa Seni Visual", sk2:"2.1 Kemahiran Seni Visual",
+        sp1:"1.1.3(i) Mengenal dan menerangkan bahasa seni visual pada stabail.",
+        sp2:"2.1.3(i) Mengaplikasikan bahasa seni visual, media dan proses menggunakan teknik binaan (stabail).",
+        catatan:"Ilmu: Kreativiti dan Inovasi · KBAT: Menganalisis", apresiasi:APRESIASI_S1 },
+      { tarikh:"7 Oktober 2026", mp:35, unit:"Unit 3", tajuk:"Saya Juara", teknik:"Stabail", bidang:"Membentuk dan Membuat Binaan", sesi:2,
+        sk1:"1.1 Bahasa Seni Visual", sk2:"2.1 Kemahiran Seni Visual",
+        sp1:"1.1.3(i) Mengenal dan menerangkan bahasa seni visual pada stabail.",
+        sp2:"2.1.3(i) Mengaplikasikan bahasa seni visual, media dan proses menggunakan teknik binaan (stabail).",
+        catatan:"Ilmu: Kreativiti dan Inovasi · KBAT: Menganalisis", apresiasi:APRESIASI_S2 },
+      { tarikh:"14 Oktober 2026", mp:36, unit:"Unit 4", tajuk:"Pusing Gasing Pusing", teknik:"Binaan (Alat Permainan)", bidang:"Mengenal Kraf Tradisional", sesi:1,
+        sk1:"1.1 Bahasa Seni Visual", sk2:"2.1 Kemahiran Seni Visual",
+        sp1:"1.1.4(i) Mengenal dan menerangkan bahasa seni visual pada alat permainan.",
+        sp2:"2.1.4(i) Mengaplikasikan bahasa seni visual, media dan proses menggunakan teknik binaan (gasing).",
+        catatan:"Ilmu: Kelestarian Alam Sekitar · KBAT: Mencipta", apresiasi:APRESIASI_S1 },
+      { tarikh:"21 Oktober 2026", mp:37, unit:"Unit 4", tajuk:"Pusing Gasing Pusing", teknik:"Binaan (Alat Permainan)", bidang:"Mengenal Kraf Tradisional", sesi:2,
+        sk1:"1.1 Bahasa Seni Visual", sk2:"2.1 Kemahiran Seni Visual",
+        sp1:"1.1.4(i) Mengenal dan menerangkan bahasa seni visual pada alat permainan.",
+        sp2:"2.1.4(i) Mengaplikasikan bahasa seni visual, media dan proses menggunakan teknik binaan (gasing).",
+        catatan:"Ilmu: Kelestarian Alam Sekitar · KBAT: Mencipta", apresiasi:APRESIASI_S2 },
+      { tarikh:"28 Oktober 2026", mp:38, unit:"Unit 5", tajuk:"Bersukan Badan Sihat", teknik:"Gosokan", bidang:"Menggambar", sesi:1,
+        sk1:"1.1 Bahasa Seni Visual", sk2:"2.1 Kemahiran Seni Visual",
+        sp1:"1.1.1(iii) Mengenal dan menerangkan bahasa seni visual pada gosokan.",
+        sp2:"2.1.1(iii) Mengaplikasikan bahasa seni visual, media dan proses menggunakan teknik gosokan.",
+        catatan:"Ilmu: Keusahawanan · KBAT: Menganalisis", apresiasi:APRESIASI_S1 },
+      { tarikh:"4 November 2026", mp:39, unit:"Unit 5", tajuk:"Bersukan Badan Sihat", teknik:"Gosokan", bidang:"Menggambar", sesi:2,
+        sk1:"1.1 Bahasa Seni Visual", sk2:"2.1 Kemahiran Seni Visual",
+        sp1:"1.1.1(iii) Mengenal dan menerangkan bahasa seni visual pada gosokan.",
+        sp2:"2.1.1(iii) Mengaplikasikan bahasa seni visual, media dan proses menggunakan teknik gosokan.",
+        catatan:"Ilmu: Keusahawanan · KBAT: Menganalisis", apresiasi:APRESIASI_S2 },
+    ]
+  },
+  { tahun:"Tahun 5", hari:"Selasa", masa:"7.30 - 8.30 pagi",
+    luarTempohFrom:10,
+    cuti:[
+      {afterSesi:1, tarikh:"25 Ogos 2026 (Selasa)", label:"MAULIDUR RASUL", tipe:"Cuti Umum"},
+      {afterSesi:1, tarikh:"29 Ogos – 6 September 2026", label:"CUTI PENGGAL 2 SARAWAK", tipe:"Cuti Sekolah"},
+    ],
+    sesi:[
+      { tarikh:"18 Ogos 2026", mp:29, unit:"Unit 1", tajuk:"Si Putih Menawan", teknik:"Lukisan dan Capan", bidang:"Menggambar", sesi:1,
+        sk1:"1.1 Bahasa Seni Visual", sk2:"2.1 Kemahiran Seni Visual",
+        sp1:"1.1.1 Menginterpretasi bahasa seni visual pada karya lukisan dan capan.",
+        sp2:"2.1.4 Meneroka penghasilan karya gabungan lukisan dan capan (bahasa seni visual, media, teknik, proses).",
+        catatan:"Ilmu: Kreativiti dan Inovasi · KBAT: Mencipta", apresiasi:APRESIASI_S1 },
+      { tarikh:"8 September 2026", mp:31, unit:"Unit 1", tajuk:"Si Putih Menawan", teknik:"Lukisan dan Capan", bidang:"Menggambar", sesi:2,
+        sk1:"1.1 Bahasa Seni Visual", sk2:"2.1 Kemahiran Seni Visual",
+        sp1:"1.1.1 Menginterpretasi bahasa seni visual pada karya lukisan dan capan.",
+        sp2:"2.1.4 Meneroka penghasilan karya gabungan lukisan dan capan (bahasa seni visual, media, teknik, proses).",
+        catatan:"Ilmu: Kreativiti dan Inovasi · KBAT: Mencipta", apresiasi:APRESIASI_S2 },
+      { tarikh:"15 September 2026", mp:32, unit:"Unit 2", tajuk:"Sayangilah Habitat Kita", teknik:"Poster dan Montaj", bidang:"Menggambar", sesi:1,
+        sk1:"1.1 Bahasa Seni Visual", sk2:"2.1 Kemahiran Seni Visual",
+        sp1:"1.1.1(ii) Menginterpretasi bahasa seni visual pada poster dan montaj.",
+        sp2:"2.1.2 Meneroka penghasilan karya gabungan poster dan montaj.",
+        catatan:"Ilmu: Kelestarian Alam Sekitar · KBAT: Bersifat Ingin Tahu", apresiasi:APRESIASI_S1 },
+      { tarikh:"22 September 2026", mp:33, unit:"Unit 2", tajuk:"Sayangilah Habitat Kita", teknik:"Poster dan Montaj", bidang:"Menggambar", sesi:2,
+        sk1:"1.1 Bahasa Seni Visual", sk2:"2.1 Kemahiran Seni Visual",
+        sp1:"1.1.1(ii) Menginterpretasi bahasa seni visual pada poster dan montaj.",
+        sp2:"2.1.2 Meneroka penghasilan karya gabungan poster dan montaj.",
+        catatan:"Ilmu: Kelestarian Alam Sekitar · KBAT: Bersifat Ingin Tahu", apresiasi:APRESIASI_S2 },
+      { tarikh:"29 September 2026", mp:34, unit:"Unit 3", tajuk:"Jaket Buku Nota", teknik:"Kolaj dan Stensilan", bidang:"Membuat Corak dan Rekaan", sesi:1,
+        sk1:"1.1 Bahasa Seni Visual", sk2:"2.1 Kemahiran Seni Visual",
+        sp1:"1.1.2 Menginterpretasi bahasa seni visual pada kolaj.",
+        sp2:"2.1.6 Mengaplikasikan bahasa seni visual pada karya stensilan (media, teknik, proses, idea rekaan produk).",
+        catatan:"Ilmu: Kreativiti dan Inovasi", apresiasi:APRESIASI_S1 },
+      { tarikh:"6 Oktober 2026", mp:35, unit:"Unit 3", tajuk:"Jaket Buku Nota", teknik:"Kolaj dan Stensilan", bidang:"Membuat Corak dan Rekaan", sesi:2,
+        sk1:"1.1 Bahasa Seni Visual", sk2:"2.1 Kemahiran Seni Visual",
+        sp1:"1.1.2 Menginterpretasi bahasa seni visual pada kolaj.",
+        sp2:"2.1.6 Mengaplikasikan bahasa seni visual pada karya stensilan (media, teknik, proses, idea rekaan produk).",
+        catatan:"Ilmu: Kreativiti dan Inovasi", apresiasi:APRESIASI_S2 },
+      { tarikh:"13 Oktober 2026", mp:36, unit:"Unit 4", tajuk:"Misi Angkasa", teknik:"Model Roket / Robot", bidang:"Membentuk dan Membuat Binaan", sesi:1,
+        sk1:"1.1 Bahasa Seni Visual / 3.1 Penghasilan Karya Kreatif", sk2:"2.1 Kemahiran Seni Visual",
+        sp1:"3.1.4 Menghasilkan karya melalui penentuan tema dan tajuk, fungsi dan rekaan, serta perkembangan idea reka bentuk.",
+        sp2:"3.1.4 Menghasilkan karya melalui penetapan jenis media dan teknik, disiplin pengkaryaan serta kemasan akhir.",
+        catatan:"Ilmu: Kreativiti dan Inovasi · KBAT: Menilai", apresiasi:APRESIASI_S1 },
+      { tarikh:"20 Oktober 2026", mp:37, unit:"Unit 4", tajuk:"Misi Angkasa", teknik:"Model Roket / Robot", bidang:"Membentuk dan Membuat Binaan", sesi:2,
+        sk1:"1.1 Bahasa Seni Visual / 3.1 Penghasilan Karya Kreatif", sk2:"2.1 Kemahiran Seni Visual",
+        sp1:"3.1.4 Menghasilkan karya melalui penentuan tema dan tajuk, fungsi dan rekaan, serta perkembangan idea reka bentuk.",
+        sp2:"3.1.4 Menghasilkan karya melalui penetapan jenis media dan teknik, disiplin pengkaryaan serta kemasan akhir.",
+        catatan:"Ilmu: Kreativiti dan Inovasi · KBAT: Menilai", apresiasi:APRESIASI_S2 },
+      { tarikh:"27 Oktober 2026", mp:38, unit:"Unit 5", tajuk:"Pasu Mini", teknik:"Tembikar", bidang:"Mengenal Kraf Tradisional", sesi:1,
+        sk1:"1.1 Bahasa Seni Visual", sk2:"2.1 Kemahiran Seni Visual",
+        sp1:"1.1.4 Menginterpretasi bahasa seni visual pada tembikar.",
+        sp2:"2.1.9 Meneroka penghasilan tembikar (bahasa seni visual, media, teknik, proses).",
+        catatan:"Ilmu: Identiti Kebangsaan", apresiasi:APRESIASI_S1 },
+      { tarikh:"3 November 2026", mp:39, unit:"Unit 5", tajuk:"Pasu Mini", teknik:"Tembikar", bidang:"Mengenal Kraf Tradisional", sesi:2,
+        sk1:"1.1 Bahasa Seni Visual", sk2:"2.1 Kemahiran Seni Visual",
+        sp1:"1.1.4 Menginterpretasi bahasa seni visual pada tembikar.",
+        sp2:"2.1.9 Meneroka penghasilan tembikar (bahasa seni visual, media, teknik, proses).",
+        catatan:"Ilmu: Identiti Kebangsaan", apresiasi:APRESIASI_S2 },
+    ]
+  },
+];
+
+function cutiRowHtml(c){
+  const isUmum = c.tipe === "Cuti Umum";
+  return `<tr style="background:${isUmum ? '#FFF3E0' : '#F0F0F0'};">
+    <td colspan="7" style="text-align:center;font-weight:700;color:${isUmum ? '#D32F2F' : '#555'};padding:7px;">
+      ⚑ ${esc(c.tarikh)} — ${esc(c.label)} <span style="font-weight:400;font-size:11px;">(${esc(c.tipe)} — tiada pengajaran, minggu ini tidak dikira dalam Minggu Sekolah)</span>
+    </td>
+  </tr>`;
+}
+
+// Papar 2 nilai (Utama | Sub) bersebelahan dengan garis pembahagi, ikut format borang eRPH asal
+function sideBySide(v1, v2){
+  return `<div style="display:flex;">
+    <div style="flex:1;padding:0 8px 0 0;border-right:1px solid #000;margin-right:8px;">${esc(v1)}</div>
+    <div style="flex:1;padding:0 0 0 0;">${esc(v2)}</div>
+  </div>`;
+}
+
+function renderRptRujukan(){
+  const html = RPT_DATA.map(y=>{
+    let rows = '';
+    y.sesi.forEach((s,i)=>{
+      const idx = i+1;
+      const isLuarTempoh = y.luarTempohFrom && idx >= y.luarTempohFrom;
+      rows += `
+      <tr${isLuarTempoh ? ' style="background:#FFF8E1;"' : ''}>
+        <td class="rpt-minggu">${idx}<br><span style="font-weight:400;font-size:11px;color:#666;">${esc(s.tarikh)}</span>${isLuarTempoh ? '<br><span style="font-size:10px;color:#D32F2F;">*luar tempoh</span>' : ''}</td>
+        <td class="rpt-minggu" style="color:#555;">MP ${esc(String(s.mp))}</td>
+        <td class="rpt-unit">${esc(s.unit)}<br>${esc(s.tajuk)}<br><span style="font-weight:400;color:#B71C1C;">Sesi ${esc(String(s.sesi))}/2</span></td>
+        <td>${esc(s.bidang)}<br><span style="color:#666;">(${esc(s.teknik)})</span></td>
+        <td>${sideBySide(s.sk1, s.sk2)}</td>
+        <td>${sideBySide(s.sp1, s.sp2)}<br><span style="color:#B71C1C;font-style:italic;">${esc(s.apresiasi)}</span></td>
+        <td>${esc(s.catatan)}</td>
+      </tr>`;
+      (y.cuti||[]).filter(c=>c.afterSesi===idx).forEach(c=>{ rows += cutiRowHtml(c); });
+    });
+    const hasLuarTempoh = !!y.luarTempohFrom;
+    return `
+      <div class="rpt-year-title">${esc(y.tahun)}</div>
+      <div class="rpt-year-sub">Hari: ${esc(y.hari)} · Masa: ${esc(y.masa)} · <span style="color:#B71C1C;">1 unit = 2 minggu (Sesi 1 &amp; 2), setiap sesi diakhiri Apresiasi Seni</span>${hasLuarTempoh ? ' · <span style="color:#D32F2F;">*Sesi terakhir jatuh selepas 30 Okt kerana cuti umum menggantikan slot dalam tempoh rasmi</span>' : ''}</div>
+      <table class="rpt-table">
+        <tr><th style="width:8%;">Minggu<br>Praktikum</th><th style="width:6%;">Minggu<br>Sekolah</th><th style="width:12%;">Unit / Tajuk / Sesi</th><th style="width:12%;">Bidang / Teknik</th><th style="width:9%;">Standard Kandungan</th><th style="width:34%;">Standard Pembelajaran + Apresiasi Seni</th><th style="width:13%;">Catatan</th></tr>
+        ${rows}
+      </table>`;
+  }).join('');
+  document.getElementById('rpt-container').innerHTML = html;
 }
 
 /* ============================================================
@@ -504,10 +782,26 @@ function openEdit(id){
 
 // Kekalkan borang asal (kerana openEdit menulis ganti innerHTML) — guna pendekatan
 // simpan state di sessionStorage + reload supaya struktur HTML borang sentiasa utuh.
+function migrateSkSp_(s, d){
+  if(!s.stdKandunganUtama && !s.stdKandunganSub && d.stdKandungan){
+    const parts = String(d.stdKandungan).split('\n').map(x=>x.trim()).filter(x=>x!=='');
+    s.stdKandunganUtama = parts[0] || '';
+    s.stdKandunganSub = parts[1] || '';
+  }
+  if(!s.stdPembelajaranUtama && !s.stdPembelajaranSub && d.stdPembelajaran){
+    const parts = String(d.stdPembelajaran).split('\n').map(x=>x.trim()).filter(x=>x!=='');
+    s.stdPembelajaranUtama = parts[0] || '';
+    s.stdPembelajaranSub = parts[1] || '';
+  }
+  return s;
+}
+
 function normalizeLoaded_(d){
   const s = emptyState();
   Object.keys(s).forEach(k=>{ if(d[k]!==undefined && k!=='aktiviti') s[k]=d[k]; });
   s.id = d.id || '';
+  // Migrasi rekod lama (medan tunggal stdKandungan/stdPembelajaran) -> Utama/Sub
+  migrateSkSp_(s, d);
   s.aktiviti = Array.isArray(d.aktiviti) ? d.aktiviti.map(a=>({
     langkah:a.langkah||'', masa:a.masa||'', isiPelajaran:a.isiPelajaran||'',
     aktiviti:a.aktiviti||'', catatan:a.catatan||'', pautan:a.pautan||''
@@ -535,7 +829,7 @@ function renderForm(){
   fillSelect('f-status', RUJUKAN.status, false);
 
   const simpleFields = ['minggu','tarikh','hari','tahun','masa','mataPelajaran','bidang','tema','teknik',
-    'tajuk','stdKandungan','stdPembelajaran','objektif','kriteria','bbm','bbb','kemahiran',
+    'tajuk','stdKandunganUtama','stdKandunganSub','stdPembelajaranUtama','stdPembelajaranSub','objektif','kriteria','bbm','bbb','kemahiran',
     'refleksi','tahap','kehadiran','bilMurid','namaPelatih','namaPembimbing','namaBesar',
     'namaPensyarah','status'];
   simpleFields.forEach(f=>{
@@ -633,11 +927,17 @@ function renderDskpDropdowns(){
   skSelect.onchange = ()=>{
     if(!skSelect.value) return;
     const [kod, sk] = skSelect.value.split('\u2016');
-    const skEl = document.getElementById('f-stdKandungan');
     const line = `${kod} ${sk}`;
-    skEl.value = skEl.value ? (skEl.value + '\n' + line) : line;
-    state.stdKandungan = skEl.value;
-    skSelect.value = ''; // reset supaya boleh tambah SK lain (atau sama) sekali lagi
+    const utamaEl = document.getElementById('f-stdKandunganUtama');
+    const subEl = document.getElementById('f-stdKandunganSub');
+    if(!utamaEl.value.trim()){
+      utamaEl.value = line;
+      state.stdKandunganUtama = line;
+    } else {
+      subEl.value = line;
+      state.stdKandunganSub = line;
+    }
+    skSelect.value = ''; // reset supaya boleh pilih lagi
   };
 
   // Dropdown SP — SEMUA SP untuk Tahun ini, bebas daripada SK (tak semestinya sepadan terus)
@@ -649,11 +949,17 @@ function renderDskpDropdowns(){
   spSelect.onchange = ()=>{
     if(spSelect.value === '') return;
     const r = dskpCurrentRows[parseInt(spSelect.value, 10)];
-    const spEl = document.getElementById('f-stdPembelajaran');
     const line = `${r.kodSP} ${r.spTeks}`;
-    spEl.value = spEl.value ? (spEl.value + '\n' + line) : line;
-    state.stdPembelajaran = spEl.value;
-    spSelect.value = ''; // reset supaya boleh tambah SP lain sekali lagi
+    const utamaEl = document.getElementById('f-stdPembelajaranUtama');
+    const subEl = document.getElementById('f-stdPembelajaranSub');
+    if(!utamaEl.value.trim()){
+      utamaEl.value = line;
+      state.stdPembelajaranUtama = line;
+    } else {
+      subEl.value = line;
+      state.stdPembelajaranSub = line;
+    }
+    spSelect.value = ''; // reset supaya boleh pilih lagi
   };
 }
 
@@ -785,6 +1091,7 @@ function openCetakFromList(id){
     if(res.error || !res.data){ toast('Ralat memuat RPH.'); switchView('list'); return; }
     const d = emptyState();
     Object.keys(d).forEach(k=>{ if(res.data[k]!==undefined && k!=='aktiviti') d[k]=res.data[k]; });
+    migrateSkSp_(d, res.data);
     d.id = res.data.id;
     d.aktiviti = res.data.aktiviti || [];
     renderCetak(d);
@@ -856,14 +1163,14 @@ function renderCetak(d){
   const pmkTableHtml = buildSidebarTable_('AMALAN PEDAGOGI MASA KINI (PMK)', PMK_ITEMS, ['34%','51%']);
   const kiTableHtml = buildSidebarTable_('KEMAHIRAN INSANIAH (KI)', KI_ITEMS, ['34%','51%']);
 
-  // Standard Kandungan/Pembelajaran: kalau ada >1 baris, papar bersebelahan (ikut borang asal)
-  function multiCellRow(label, text){
-    const lines = String(text||'').split('\n').map(s=>s.trim()).filter(s=>s!=='');
-    if(lines.length <= 1){
-      return `<tr><td class="label-cell" style="text-align:left;">${esc(label)}</td><td colspan="4">${esc(text||'')}</td></tr>`;
-    }
-    const cells = lines.map((l,i)=>`<div style="flex:1;padding:0 10px 0 0;${i<lines.length-1?'border-right:1px solid #000;margin-right:10px;':''}white-space:pre-wrap;">${esc(l)}</div>`).join('');
-    return `<tr><td class="label-cell" style="text-align:left;">${esc(label)}</td><td colspan="4"><div style="display:flex;">${cells}</div></td></tr>`;
+  // Standard Kandungan/Pembelajaran: SENTIASA papar 2 LAJUR SEBENAR (Utama | Sub), guna sel jadual
+  // sebenar (bukan garis flex dalam satu sel) supaya sepadan gaya grid borang rasmi.
+  function twoColRow(label, textUtama, textSub){
+    return `<tr>
+      <td class="label-cell" style="text-align:left;">${esc(label)}</td>
+      <td colspan="2" style="white-space:pre-wrap;">${esc(textUtama||'')}</td>
+      <td colspan="2" style="white-space:pre-wrap;">${esc(textSub||'')}</td>
+    </tr>`;
   }
   function objektifBlock(text){
     const lines = String(text||'').split('\n').map(s=>s.trim()).filter(s=>s!=='');
@@ -927,8 +1234,8 @@ function renderCetak(d){
       </tr>
       <tr><td class="label-cell" style="text-align:left;">Bidang</td><td colspan="2">${esc(d.bidang)}</td><td class="label-cell" style="text-align:left;">Tema</td><td>${esc(d.tema)}</td></tr>
       <tr><td class="label-cell" style="text-align:left;">Teknik</td><td colspan="2">${esc(d.teknik)}</td><td class="label-cell" style="text-align:left;">Tajuk</td><td>${esc(d.tajuk)}</td></tr>
-      ${multiCellRow('Standard Kandungan', d.stdKandungan)}
-      ${multiCellRow('Standard Pembelajaran', d.stdPembelajaran)}
+      ${twoColRow('Standard Kandungan', d.stdKandunganUtama, d.stdKandunganSub)}
+      ${twoColRow('Standard Pembelajaran', d.stdPembelajaranUtama, d.stdPembelajaranSub)}
       ${objektifBlock(d.objektif)}
       ${kriteriaBlock(d.kriteria)}
       ${plainRow('Bahan Bantu Mengajar (BBM)', d.bbm)}
